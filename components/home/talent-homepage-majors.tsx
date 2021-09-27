@@ -1,6 +1,6 @@
 export default function TalentHomePageMajors() {
   return (
-    <div className="px-5">
+    <div className="max-w-lg m-auto px-5 bg-white">
       <h2 className="text-sm font-bold text-indigo-700">
         📝 Lihat proyek di jurusan kuliahmu
       </h2>

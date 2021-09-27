@@ -1,6 +1,6 @@
 export default function TalentHomePageSkills() {
   return (
-    <div className="mt-4 px-5">
+    <div className="max-w-lg m-auto py-4 px-5 bg-white">
       <h2 className="text-sm font-bold text-indigo-700">
         Proyek membutuhkan keahlianmu ✍🏻
       </h2>

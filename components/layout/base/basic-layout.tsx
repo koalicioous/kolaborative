@@ -5,7 +5,7 @@ const BasicLayout: React.FC = ({ children }) => {
   return (
     <>
       <MainHeader />
-      <main className="pb-16">
+      <main className="pb-16 bg-gray-100">
         { children }
       </main>
       <BottomNavbar />
