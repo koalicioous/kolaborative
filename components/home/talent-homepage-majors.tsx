@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 export default function TalentHomePageMajors() {
   return (
     <div className="max-w-lg m-auto px-5 bg-white">
@@ -13,10 +15,12 @@ export default function TalentHomePageMajors() {
         <li className="p-3 shadow-md border text-center rounded-lg font-bold text-sm">Statistika</li>
       </ul>
       <div className="mt-4 text-center">
-        <a href="" className="inline-block text-indigo-700 text-xs">
-          Lihat semua jurusan (131)
-        </a>
+        <Link href="/">
+          <a className="inline-block text-indigo-700 text-xs">
+            Lihat semua jurusan (131)
+          </a>
+        </Link>
       </div>
     </div>
-  )
+  );
 }

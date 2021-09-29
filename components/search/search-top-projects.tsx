@@ -1,4 +1,4 @@
-import ProjectItem from "../projects/project-item";
+import ProjectItem from '../projects/project-item';
 
 export default function SearchTopProjects() {
   return (
@@ -12,5 +12,5 @@ export default function SearchTopProjects() {
       <ProjectItem className="mt-4" />
       <ProjectItem className="mt-4" />
     </section>
-  )
+  );
 }

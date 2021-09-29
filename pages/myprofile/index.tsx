@@ -1,7 +1,7 @@
-import { ReactElement } from "react"
-import BasicLayout from "../../components/layout/base/basic-layout"
-import Head from "next/head"
-import ProfileHeader from "../../components/profile/profile-header"
+import { ReactElement } from 'react';
+import Head from 'next/head';
+import BasicLayout from '../../components/layout/base/basic-layout';
+import ProfileHeader from '../../components/profile/profile-header';
 
 export default function MyProfile() {
   return (
@@ -14,7 +14,7 @@ export default function MyProfile() {
 
       <ProfileHeader />
     </>
-  )
+  );
 }
 
 MyProfile.getLayout = function getLayout(page: ReactElement) {
@@ -22,5 +22,5 @@ MyProfile.getLayout = function getLayout(page: ReactElement) {
     <BasicLayout>
       {page}
     </BasicLayout>
-  )
-}
+  );
+};

@@ -1,8 +1,8 @@
 interface ProjectItemProps {
-  className?: string
+  className: string
 }
 
-export default function ProjectItem({className}: ProjectItemProps) {
+export default function ProjectItem({ className }: ProjectItemProps) {
   return (
     <div className={`p-2 shadow-md border rounded-lg ${className}`}>
       <div className="flex justify-between">
@@ -12,7 +12,16 @@ export default function ProjectItem({className}: ProjectItemProps) {
       <h3 className="mt-2 text-sm font-bold text-indigo-700">
         Karya Cipta: Mesin Pembersih Air Bertenaga Surya
       </h3>
-      <p className="mt-5 text-xs">Mencari <b>3 Talenta</b> dari <b>Informatika, Ekonomi</b></p>
+      <p className="mt-5 text-xs">
+        Mencari
+        <b>
+          3 Talenta
+        </b>
+        dari
+        <b>
+          Informatika, Ekonomi
+        </b>
+      </p>
     </div>
-  )
+  );
 }

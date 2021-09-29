@@ -13,5 +13,5 @@ export default function SearchMajors() {
         <li className="p-3 shadow-md border text-center rounded-lg font-bold text-sm">Statistika</li>
       </ul>
     </section>
-  )
+  );
 }

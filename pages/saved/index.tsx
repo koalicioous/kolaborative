@@ -1,7 +1,7 @@
-import Head from "next/head"
-import { ReactElement } from "react"
-import BasicLayout from "../../components/layout/base/basic-layout"
-import ProjectItem from "../../components/projects/project-item"
+import Head from 'next/head';
+import { ReactElement } from 'react';
+import BasicLayout from '../../components/layout/base/basic-layout';
+import ProjectItem from '../../components/projects/project-item';
 
 export default function Saved() {
   return (
@@ -9,7 +9,7 @@ export default function Saved() {
       <Head>
         <title>
           Saved Projects - Kolaborative
-        </title>  
+        </title>
       </Head>
       <div className="max-w-lg mx-auto px-5 py-4 bg-white">
         <div className="flex items-center">
@@ -27,7 +27,7 @@ export default function Saved() {
         <ProjectItem className="mt-4" />
       </div>
     </>
-  )
+  );
 }
 
 Saved.getLayout = function getLayout(page: ReactElement) {
@@ -35,5 +35,5 @@ Saved.getLayout = function getLayout(page: ReactElement) {
     <BasicLayout>
       {page}
     </BasicLayout>
-  )
-}
+  );
+};

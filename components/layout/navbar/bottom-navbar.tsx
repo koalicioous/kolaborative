@@ -1,15 +1,16 @@
-import Link from 'next/link'
-import { useRouter } from 'next/router'
-import { menus } from '../../../lib/layout/navbar'
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import { FC } from 'react';
+import { menus } from '../../../lib/layout/navbar';
 
-const BottomNavbar: React.FC = () => {
-  const router = useRouter()
+const BottomNavbar: FC = () => {
+  const router = useRouter();
 
   return (
     <nav className="fixed bottom-0 inset-x-0 z-10 bg-white w-full shadow-xl border-t">
       <ul className="max-w-lg m-auto flex">
-        {menus.map(menu => {
-          const isActive = menu.href === router.asPath
+        {menus.map((menu) => {
+          const isActive = menu.href === router.asPath;
 
           return (
             <li key={menu.name} className="flex-1">
@@ -22,11 +23,11 @@ const BottomNavbar: React.FC = () => {
                 </a>
               </Link>
             </li>
-          )
+          );
         })}
       </ul>
     </nav>
-  )
-}
+  );
+};
 
-export default BottomNavbar
+export default BottomNavbar;
