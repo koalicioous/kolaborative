@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import { useRouter } from 'next/router'
-import { menus } from '../../../data/layout/navbar'
+import { menus } from '../../../lib/layout/navbar'
 
 const BottomNavbar: React.FC = () => {
   const router = useRouter()
