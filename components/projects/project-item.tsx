@@ -1,8 +1,8 @@
-interface Props {
+interface ProjectItemProps {
   className?: string
 }
 
-export default function ProjectItem({className}: Props) {
+export default function ProjectItem({className}: ProjectItemProps) {
   return (
     <div className={`p-2 shadow-md border rounded-lg ${className}`}>
       <div className="flex justify-between">
