@@ -1,32 +1,68 @@
+import Link from 'next/link'
+
+interface Menu {
+  name: string,
+  icon: JSX.Element,
+  href: string
+}
+
 const BottomNavbar: React.FC = () => {
+  const menus: Menu[] = [
+    {
+      name: 'Home',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
+        </svg>
+      ),
+      href: '/'
+    },
+    {
+      name: 'Saved',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z" />
+        </svg>
+      ),
+      href: '/saved'
+    },
+    {
+      name: 'My Projects',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z" />
+        </svg>
+      ),
+      href: '/myprojects'
+    },
+    {
+      name: 'Profile',
+      icon: (
+        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+        </svg>
+      ),
+      href: '/myprofile'
+    }
+  ]
 
   return (
-    <nav className="fixed bottom-0 inset-x-0 z-10 bg-indigo-700 w-full shadow-xl">
+    <nav className="fixed bottom-0 inset-x-0 z-10 bg-white w-full shadow-xl border-t">
       <ul className="max-w-lg m-auto flex">
-        <li className="p-2 flex-1 text-xs text-white text-center flex flex-col justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z" />
-          </svg>
-          Home
-        </li>
-        <li className="p-2 flex-1 text-xs text-white text-center flex flex-col justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M5 4a2 2 0 012-2h6a2 2 0 012 2v14l-5-2.5L5 18V4z" />
-          </svg>
-          Saved
-        </li>
-        <li className="p-3 flex-1 text-xs text-white text-center flex flex-col justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-          </svg>
-          My Projects
-        </li>
-        <li className="p-2 flex-1 text-xs text-white text-center flex flex-col justify-center items-center">
-          <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-            <path fillRule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clipRule="evenodd" />
-          </svg>
-          Profile
-        </li>
+        {menus.map(menu => {
+          return (
+            <li key={menu.name} className="flex-1">
+              <Link href={menu.href}>
+                <a className="p-2 text-xs text-indigo-700 text-center flex flex-col justify-center items-center">
+                  {menu.icon}
+                  <p className="mt-1">
+                    {menu.name}
+                  </p>
+                </a>
+              </Link>
+            </li>
+          )
+        })}
       </ul>
     </nav>
   )
