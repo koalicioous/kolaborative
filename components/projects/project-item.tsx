@@ -14,11 +14,11 @@ export default function ProjectItem({ className }: ProjectItemProps) {
       </h3>
       <p className="mt-5 text-xs">
         Mencari
-        <b>
+        <b className="mx-1">
           3 Talenta
         </b>
         dari
-        <b>
+        <b className="ml-1">
           Informatika, Ekonomi
         </b>
       </p>

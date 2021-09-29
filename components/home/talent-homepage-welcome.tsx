@@ -11,7 +11,7 @@ export default function TalentHomePageWelcome() {
       <p className="mt-2 text-indigo-700 text-xs text-center">
         Lebih suka direkrut saja?
         <Link href="/">
-          <a className="font-bold">
+          <a className="font-bold ml-1">
             Klik di sini untuk daftar jadi Top Talent
           </a>
         </Link>
