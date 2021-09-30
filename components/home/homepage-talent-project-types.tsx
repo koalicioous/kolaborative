@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function TalentHomePageProjectTypes() {
+export default function HomePageTalentProjectTypes() {
   return (
     <div className="max-w-lg m-auto py-4 px-5 bg-white">
       <div className="p-4 bg-indigo-100 rounded-lg">

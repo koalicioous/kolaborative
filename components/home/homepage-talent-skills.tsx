@@ -1,4 +1,4 @@
-export default function TalentHomePageSkills() {
+export default function HomePageTalentSkills() {
   return (
     <div className="max-w-lg m-auto py-4 px-5 bg-white">
       <h2 className="text-sm font-bold text-indigo-700">

@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function TalentHomePageMajors() {
+export default function HomePageTalentMajors() {
   return (
     <div className="max-w-lg m-auto px-5 bg-white">
       <h2 className="text-sm font-bold text-indigo-700">

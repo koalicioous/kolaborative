@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function TalentHomePageWelcome() {
+export default function HomePageTalentWelcome() {
   return (
     <div className="max-w-lg m-auto p-5 bg-white">
       <h1 className="font-bold text-indigo-700 text-xl text-center">

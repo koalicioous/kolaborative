@@ -1,6 +1,6 @@
 import ProjectItem from '../projects/project-item';
 
-export default function TalentHomePageProjects() {
+export default function HomePageTalentProjects() {
   return (
     <div className="max-w-lg m-auto px-5 py-4 border-t-2 bg-white">
       <h2 className="text-sm font-bold text-indigo-700">

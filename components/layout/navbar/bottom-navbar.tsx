@@ -10,7 +10,7 @@ const BottomNavbar: FC = () => {
     <nav className="fixed bottom-0 inset-x-0 z-10 bg-white w-full shadow-xl border-t">
       <ul className="max-w-lg m-auto flex">
         {menus.map((menu) => {
-          const isActive = menu.href === router.asPath;
+          const isActive = router.asPath.startsWith(menu.href);
 
           return (
             <li key={menu.name} className="flex-1">
