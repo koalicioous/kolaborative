@@ -1,7 +1,6 @@
-export type ButtonSizes = 'lg' | 'md' | 'sm' | 'xl' | 'xs';
+export type ButtonSizes = 'lg' | 'md' | 'sm';
 
 interface ButtonBaseProps {
-  /** The size of the button. Available sizes: `"xs" | "sm" | "md" | "lg" | "xl"` */
   size?: ButtonSizes;
 }
 
