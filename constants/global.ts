@@ -1,2 +1,2 @@
-export const MODE_TALENT = 'talent';
-export const MODE_OWNER = 'owner';
+export const MODE_TALENT: string = 'talent';
+export const MODE_OWNER: string = 'owner';

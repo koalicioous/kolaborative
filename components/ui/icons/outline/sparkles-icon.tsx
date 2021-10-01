@@ -1,6 +1,6 @@
 import { ComponentProps } from 'react';
 
-export default function BookmarkIcon({
+export default function SparklesIconOutline({
   className,
 }: ComponentProps<'svg'>) {
   return (
@@ -15,7 +15,7 @@ export default function BookmarkIcon({
         strokeLinecap="round"
         strokeLinejoin="round"
         strokeWidth={2}
-        d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"
+        d="M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
       />
     </svg>
   );

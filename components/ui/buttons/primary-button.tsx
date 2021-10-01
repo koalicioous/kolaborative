@@ -1,18 +1,21 @@
 /* eslint-disable react/button-has-type */
-import { ButtonHTMLAttributes } from 'react';
 import clsx from 'clsx';
+import buttonSizes from './utils/helpers';
+import { ButtonProps } from './utils/types';
 
 export default function PrimaryButton({
   type,
   className,
   children,
-}: ButtonHTMLAttributes<HTMLButtonElement>) {
+  size = 'md',
+}: ButtonProps) {
   return (
     <button
       type={type ?? 'button'}
       className={clsx(
+        'bg-indigo-700 text-white',
         className,
-        'px-4 py-3 bg-indigo-700 text-white text-sm rounded-lg',
+        buttonSizes(size),
       )}
     >
       {children}
