@@ -8,6 +8,7 @@ import ProjectDetailDescription from '../../components/projects/project-detail-d
 import ProjectDetailGoal from '../../components/projects/project-detail-goal';
 import ProjectDetailDuration from '../../components/projects/project-detail-duration';
 import ProjectDetailBar from '../../components/projects/project-detail-bar';
+import ProjectDetailTalent from '../../components/projects/project-detail-talent';
 
 export default function ProjectDetail() {
   const router = useRouter();
@@ -34,6 +35,7 @@ export default function ProjectDetail() {
         <ProjectDetailDescription project={project} />
         <ProjectDetailGoal project={project} />
         <ProjectDetailDuration project={project} />
+        <ProjectDetailTalent project={project} />
       </div>
 
       <ProjectDetailBar />
