@@ -20,7 +20,7 @@ export default function CreateProjectTab({ step }: CreateProjectTabProps) {
           1. Informasi Proyek
         </a>
       </Link>
-      <Link href={{ pathname: 'create-project', query: { step: STEP_TALENT } }}>
+      <Link href={{ pathname: '/create-project', query: { step: STEP_TALENT } }}>
         <a type="button" className={`p-1 w-full shadow rounded-full text-center font-bold text-sm ${talentClass}`}>
           2. Kebutuhan Talenta
         </a>
