@@ -1,8 +1,12 @@
 import { v4 as uuidv4 } from 'uuid';
 import { NewProject } from '../data/project';
 import { NewProjectDetailAction, NewProjectDetailActionType } from '../actions/NewProjectDetailAction';
+import { NewProjectTalentAction, NewProjectTalentActionType } from '../actions/NewProjectTalentsAction';
 
-const NewProjectReducer = (state: NewProject, action: NewProjectDetailAction): NewProject => {
+const NewProjectReducer = (
+  state: NewProject,
+  action: NewProjectDetailAction | NewProjectTalentAction,
+): NewProject => {
   switch (action.type) {
     case NewProjectDetailActionType.UPDATE_FIELD:
       return {
@@ -38,6 +42,26 @@ const NewProjectReducer = (state: NewProject, action: NewProjectDetailAction): N
             };
           }),
         ],
+      };
+    case NewProjectTalentActionType.INSERT_TALENT:
+      return {
+        ...state,
+        talents: [...state.talents, action.payload],
+      };
+    case NewProjectTalentActionType.EDIT_TALENT:
+      return {
+        ...state,
+        talents: [
+          ...state.talents.map((talent) => {
+            if (talent.id === action.payload.id) return action.payload;
+            return talent;
+          }),
+        ],
+      };
+    case NewProjectTalentActionType.REMOVE_TALENT:
+      return {
+        ...state,
+        talents: [...state.talents.filter((talent) => talent.id !== action.payload.id)],
       };
     default:
       return state;

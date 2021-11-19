@@ -11,6 +11,14 @@ export type Goal = {
   description: string,
 }
 
+export type Talent = {
+  id: string,
+  major: string,
+  amount: number,
+  description: string,
+  skills: {id: string, text:string}[]
+}
+
 export interface NewProject {
   name: string,
   isPrivate: boolean,
@@ -20,6 +28,7 @@ export interface NewProject {
   goals: Goal[],
   startDate?: string,
   finishDate?: string,
+  talents: Talent[],
 }
 
 export const InitialState: NewProject = {
@@ -31,4 +40,5 @@ export const InitialState: NewProject = {
   goals: [],
   startDate: '',
   finishDate: '',
+  talents: [],
 };

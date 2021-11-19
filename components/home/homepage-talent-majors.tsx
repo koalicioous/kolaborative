@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import Image from 'next/image';
+import GraduationHatSolid from '../ui/icons/solid/graduation-hat';
 
 export default function HomePageTalentMajors() {
   const MAJORS = [
@@ -56,12 +57,8 @@ export default function HomePageTalentMajors() {
   return (
     <div className="max-w-lg m-auto px-5 bg-white">
       <div className="flex items-center">
-        <Image
-          src="/graduation-cap.svg"
-          width={32}
-          height={32}
-        />
-        <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600">
+        <GraduationHatSolid className="w-8 h-8 mt-1 text-yellow-500" />
+        <h2 className="ml-1 text-md md:text-xl font-bold text-blue-600">
           Proyek Berdasarkan Jurusan
         </h2>
       </div>

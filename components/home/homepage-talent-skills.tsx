@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import BrainIconSolid from '../ui/icons/solid/brain-icon';
 
 export default function HomePageTalentSkills() {
   const SKILLS = [
@@ -9,12 +9,8 @@ export default function HomePageTalentSkills() {
   return (
     <div className="max-w-lg m-auto py-4 px-5 bg-white">
       <div className="flex items-center">
-        <Image
-          src="/brain.svg"
-          width={24}
-          height={24}
-        />
-        <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600">
+        <BrainIconSolid className="w-8 h-8 mt-2 text-yellow-500" />
+        <h2 className="text-md md:text-xl font-bold text-blue-600">
           Proyek Membutuhkan Keahlianmu
         </h2>
       </div>

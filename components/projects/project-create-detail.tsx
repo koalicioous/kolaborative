@@ -171,7 +171,7 @@ export default function ProjectCreateDetail() {
             type="date"
             className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
             placeholder="Event yang diikuti proyek ini"
-            value={project.registrationDeadline}
+            value={project.startDate}
             onChange={(e) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'startDate',
@@ -191,7 +191,7 @@ export default function ProjectCreateDetail() {
             type="date"
             className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
             placeholder="Event yang diikuti proyek ini"
-            value={project.registrationDeadline}
+            value={project.finishDate}
             onChange={(e) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'finishDate',

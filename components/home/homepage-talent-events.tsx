@@ -1,5 +1,5 @@
-import Image from 'next/image';
 import Link from 'next/link';
+import CalendarSolid from '../ui/icons/solid/calendar-icon';
 
 export default function HomePageTalentEvents() {
   const EVENTS = [
@@ -12,12 +12,8 @@ export default function HomePageTalentEvents() {
   return (
     <div className="max-w-lg m-auto py-4 px-5 bg-white">
       <div className="flex items-center">
-        <Image
-          src="/calendar.svg"
-          width={24}
-          height={24}
-        />
-        <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600">
+        <CalendarSolid className="w-6 h-6 text-yellow-500" />
+        <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600 pt-1">
           Event Seru untuk Diikuti!
         </h2>
       </div>
