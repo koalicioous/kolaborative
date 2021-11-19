@@ -21,3 +21,14 @@ export interface NewProject {
   startDate?: string,
   finishDate?: string,
 }
+
+export const InitialState: NewProject = {
+  name: '',
+  isPrivate: true,
+  event: '',
+  registrationDeadline: '',
+  description: '',
+  goals: [],
+  startDate: '',
+  finishDate: '',
+};

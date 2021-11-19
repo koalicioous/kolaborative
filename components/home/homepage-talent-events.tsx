@@ -24,7 +24,7 @@ export default function HomePageTalentEvents() {
       <div className="grid grid-cols-2 gap-2 mt-3">
         {
             EVENTS.map((event) => (
-              <div className="border border-blue-200 rounded-lg p-3 pb-16 text-white font-semibold" style={{ background: 'url(https://unsplash.com/random), linear-gradient(45deg, #3365E3 0%, #6B8EE7 100%);' }}>
+              <div key={event} className="border border-blue-200 rounded-lg p-3 pb-16 text-white font-semibold" style={{ background: 'url(https://unsplash.com/random), linear-gradient(45deg, #3365E3 0%, #6B8EE7 100%)' }}>
                 {event}
               </div>
             ))

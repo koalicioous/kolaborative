@@ -1,30 +1,10 @@
-import { useReducer } from 'react';
 import Image from 'next/image';
-import { NewProject } from '../../lib/data/project';
-import NewProjectReducer from '../../lib/reducers/new-project-reducer';
 import { NewProjectDetailActionType } from '../../lib/actions/NewProjectDetailAction';
-
-const InitialState: NewProject = {
-  name: 'jhgjhg',
-  isPrivate: true,
-  event: 'sdfsdf',
-  registrationDeadline: '',
-  description: 'asfasdf',
-  goals: [
-    { id: '1', description: 'A Description' },
-    { id: '2', description: 'A Description 2' },
-    { id: '3', description: 'A Description 3' },
-    { id: '4', description: 'A Description 4' },
-    { id: '5', description: 'A Description 5' },
-    { id: '6', description: 'A Description 6' },
-    { id: '7', description: 'A Description 7' },
-  ],
-  startDate: '',
-  finishDate: '',
-};
+import { Goal } from '../../lib/data/project';
+import { useStore } from '../../lib/stores/createProject';
 
 export default function ProjectCreateDetail() {
-  const [project, dispatch] = useReducer(NewProjectReducer, InitialState);
+  const { project, dispatch } = useStore();
 
   return (
     <section className="max-w-lg mx-auto bg-white p-3">
@@ -97,7 +77,7 @@ export default function ProjectCreateDetail() {
           value={project.registrationDeadline}
           onChange={(e) => dispatch({
             type: NewProjectDetailActionType.UPDATE_FIELD,
-            field: 'registrationDealine',
+            field: 'registrationDeadline',
             payload: e.target.value,
           })}
         />
@@ -131,7 +111,7 @@ export default function ProjectCreateDetail() {
         </div>
         {
           project.goals.length > 0
-          && project.goals.map((goal, index) => (
+          && project.goals.map((goal: Goal, index: number) => (
             <div key={goal.id} className="flex items-center">
               <div className="border border-gray-200 my-2 rounded-md flex items-center focus-within:border-blue-300 flex-grow">
                 <span className="w-12 text-center">{`${index + 1} . `}</span>

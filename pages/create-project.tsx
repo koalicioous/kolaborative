@@ -6,6 +6,7 @@ import ProjectCreateDetail from '../components/projects/project-create-detail';
 import { STEP_DETAIL } from '../constants/global';
 import CreateProjectTab from '../components/tabs/create-project-tab';
 import ProjectCreateTalents from '../components/projects/project-create-talents';
+import { NewProjectStoreProvider } from '../lib/stores/createProject';
 
 export default function CreateProject() {
   const { query } = useRouter();
@@ -13,7 +14,7 @@ export default function CreateProject() {
   const isDetailStep: boolean = step ? step === STEP_DETAIL : true;
 
   return (
-    <>
+    <NewProjectStoreProvider>
       <Head>
         <title>
           Create New Project — Kolaborative
@@ -25,7 +26,7 @@ export default function CreateProject() {
           ? <ProjectCreateDetail />
           : <ProjectCreateTalents />
       }
-    </>
+    </NewProjectStoreProvider>
   );
 }
 

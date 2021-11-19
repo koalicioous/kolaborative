@@ -71,6 +71,7 @@ export default function HomePageTalentMajors() {
             <li
               className="py-2 px-2 md:px-4 flex items-center shadow-md border-2 border-white text-center rounded-lg font-bold text-sm text-white"
               style={{ background: `linear-gradient(90deg, ${major.gradientFrom} 40.94%, ${major.gradientTo} 90.31%)` }}
+              key={major.name}
             >
               <Image
                 src={major.icon}

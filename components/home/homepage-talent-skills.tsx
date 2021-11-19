@@ -21,7 +21,7 @@ export default function HomePageTalentSkills() {
       <ul className="mt-4 flex flex-wrap">
         {
           SKILLS.map((skill) => (
-            <li className="text-xs sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium">{ skill }</li>
+            <li className="text-xs sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium" key={skill}>{ skill }</li>
           ))
         }
       </ul>
