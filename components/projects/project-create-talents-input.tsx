@@ -1,6 +1,7 @@
-import { useState } from 'react';
+import { useState, Dispatch, SetStateAction } from 'react';
 import { v4 as uuid4 } from 'uuid';
 import { WithContext as ReactTags } from 'react-tag-input';
+import DeleteIconSolid from '../ui/icons/solid/delete-icon';
 import { Talent } from '../../lib/data/project';
 import { useStore } from '../../lib/stores/createProject';
 import { NewProjectTalentActionType } from '../../lib/actions/NewProjectTalentsAction';
@@ -10,15 +11,30 @@ const keyCodes = {
   enter: [10, 13],
 };
 const delimiters = [keyCodes.comma, ...keyCodes.enter];
+const defaultTalent = {
+  id: uuid4(),
+  major: '',
+  amount: 1,
+  description: '',
+  skills: [],
+};
 
-export default function CreateTalentInput() {
-  const [newTalent, setNewTalent] = useState<Talent>({
-    id: uuid4(),
-    major: '',
-    amount: 0,
-    description: '',
-    skills: [],
+interface CreateTalentInputProps {
+  isEditing: boolean,
+  talent?: Talent,
+  editTalent: Dispatch<SetStateAction<string>>
+}
+
+export default function CreateTalentInput(
+  { isEditing, talent, editTalent } : CreateTalentInputProps,
+) {
+  const [newTalent, setNewTalent] = useState<Talent>(talent || defaultTalent);
+  const [validation, setValidation] = useState({
+    major: false,
+    description: false,
   });
+
+  const [edit] = useState<boolean|undefined>(isEditing);
   const { dispatch } = useStore();
 
   const handleAddSkill = (skill: {id: string, text: string}) => setNewTalent({
@@ -31,10 +47,22 @@ export default function CreateTalentInput() {
     skills: [...newTalent.skills.filter((tag, index) => index !== i)],
   });
 
+  const handleInsertTalent = () => {
+    if (newTalent.major && newTalent.description) {
+      return dispatch(
+        { type: NewProjectTalentActionType.INSERT_TALENT, payload: { ...newTalent, id: uuid4() } },
+      );
+    }
+    return setValidation({
+      major: newTalent.major.length < 1,
+      description: newTalent.description.length < 1,
+    });
+  };
+
   return (
-    <div className="border-b border-gray-100">
+    <div className={`border-b flex flex-col  ${edit ? 'p-3 border rounded-md border-gray-200' : 'border-gray-100'}`}>
       <div className="grid grid-cols-4 gap-3">
-        <label htmlFor="name" className="block col-span-3">
+        <label htmlFor="major" className="block col-span-3">
           <div>
             <span className="text-sm font-medium text-gray-700">
               Jurusan
@@ -42,13 +70,15 @@ export default function CreateTalentInput() {
             <span className="text-red-500">*</span>
           </div>
           <input
-            id="name"
+            id="major"
             type="text"
-            className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full"
+            className={`px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full ${!validation.major ? 'border-gray-200' : 'border-red-500'}`}
             placeholder="Pilih jurusan yang kamu butuhkan"
             value={newTalent.major}
             onChange={(e) => setNewTalent({ ...newTalent, major: e.target.value })}
           />
+          { validation.major
+          && <span className="text-red-500 text-xs">Jurusan tidak boleh kosong</span>}
         </label>
         <label htmlFor="amount" className="block">
           <div>
@@ -57,25 +87,13 @@ export default function CreateTalentInput() {
             </span>
             <span className="text-red-500">*</span>
           </div>
-          {/* <input
-            id="amount"
-            min="1"
-            type="number"
-            className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full"
-            placeholder="Jumlah"
-            value={newTalent.amount}
-            onChange={(e) => setNewTalent({
-              ...newTalent,
-              amount: parseInt(e.target.value, 10),
-            })}
-          /> */}
-          <select name="amount" id="amount" className="px-3 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) + 1 })}>
+          <select name="amount" id="amount" value={newTalent.amount} className="px-3 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) })}>
             {
               [...Array(10)].map((item, index) => (
                 <option
-                  value={index}
+                  value={index + 1}
                   key={Math.random()}
-                  selected={newTalent.amount === (index + 1)}
+                  // selected={newTalent.amount === (index + 1)}
                 >
                   {index + 1}
                 </option>
@@ -94,14 +112,16 @@ export default function CreateTalentInput() {
         <textarea
           id="jobDescription"
           rows={5}
-          className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
+          className={`px-2 py-3 text-sm rounded-md border mt-1 w-full bg-white ${validation.description ? 'border-red-500' : 'border-gray-200'}`}
           placeholder="Jelaskan pekerjaan yang perlu dilakukan"
           value={newTalent.description}
-          onChange={(e) => setNewTalent({ ...newTalent, description: e.target.value })}
+          onChange={(e) => { setNewTalent({ ...newTalent, description: e.target.value }); }}
         />
+        { validation.description
+          && <span className="text-red-500 text-xs -my-1">Jurusan tidak boleh kosong</span>}
       </label>
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
-      <label htmlFor="skills" className="block col-span-3">
+      <label htmlFor="skills" className="block col-span-3 mt-3">
         <div>
           <span className="text-sm font-medium text-gray-700">
             Keahlian yang diharapkan
@@ -115,22 +135,61 @@ export default function CreateTalentInput() {
           handleAddition={handleAddSkill}
           handleDelete={handleDeleteSkill}
         />
+        <span
+          className="mt-3 text-gray-500 text-sm"
+        >
+          Tekan
+          {' '}
+          <b>&apos;Enter&apos;</b>
+          {' '}
+          atau
+          {' '}
+          <b>&apos;koma&apos;</b>
+          {' '}
+          untuk menambahkan skill baru
+        </span>
       </label>
-      <div className="grid grid-cols-2 gap-2 mt-3">
-        <button type="button">
-          Hapus
-        </button>
+      <div className="mt-4 flex">
+        {
+          edit && (
+          <button
+            type="button"
+            className="transition-all hover:shadow hover:bg-red-200 w-20 mr-2 pt-3 pl-3 text-red-700 h-12 rounded-md bg-red-100 border-red-300 flex items-center justify-center"
+          >
+            <DeleteIconSolid className="w-8 h-8" />
+          </button>
+          )
+        }
         <button
           type="button"
-          className="p-2 rounded-md border border-blue-500 text-blue-600"
-          onClick={() => dispatch({
-            type: NewProjectTalentActionType.INSERT_TALENT,
-            payload: newTalent,
-          })}
+          className="p-2 rounded-md border border-blue-500 bg-blue-500 shadow hover:bg-blue-600 text-white transition-all w-full"
+          onClick={(handleInsertTalent)}
         >
-          Simpan
+          {
+            edit
+              ? 'Perbarui'
+              : '+ Tambahkan'
+          }
         </button>
       </div>
+      {
+        edit
+        && (
+          <button
+            type="button"
+            className="-mx-3 -mb-3 mt-3 py-3 border-t border-gray-200 text-sm text-gray-500 font-medium bg-gray-100 hover:bg-gray-200 transition-all"
+            onClick={() => {
+              editTalent('');
+            }}
+          >
+            Batalkan
+          </button>
+        )
+      }
     </div>
   );
 }
+
+CreateTalentInput.defaultProps = {
+  talent: defaultTalent,
+};

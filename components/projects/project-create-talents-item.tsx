@@ -1,12 +1,14 @@
+import { Dispatch, SetStateAction } from 'react';
 import UsersSolid from '../ui/icons/solid/users';
 import { Talent } from '../../lib/data/project';
 import GraduationHatSolid from '../ui/icons/solid/graduation-hat';
 
 interface TalentItemProps {
     talent: Talent
+    editTalent: Dispatch<SetStateAction<string>>
 }
 
-export default function TalentItem({ talent }: TalentItemProps) {
+export default function TalentItem({ talent, editTalent }: TalentItemProps) {
   return (
     <div className="p-4 bg-blue-50 rounded-md flex flex-col">
       <div className="flex items-center justify-between">
@@ -35,14 +37,20 @@ export default function TalentItem({ talent }: TalentItemProps) {
         <ul className="list-disc list-inside">
           {
             talent.skills.map((skill) => (
-              <li className="my-1">
+              <li className="my-1" key={skill.id}>
                 {[skill.text]}
               </li>
             ))
           }
         </ul>
       </div>
-      <button type="button" className="transition-all py-2 text-sm -mx-4 -mb-4 mt-4 rounded-b-md text-blue-400 font-medium flex-grow text-center bg-blue-100 hover:bg-blue-200 hover:text-blue-600">
+      <button
+        type="button"
+        className="transition-all py-2 text-sm -mx-4 -mb-4 mt-4 rounded-b-md text-blue-400 font-medium flex-grow text-center bg-blue-100 hover:bg-blue-200 hover:text-blue-600"
+        onClick={() => {
+          editTalent(talent.id);
+        }}
+      >
         Klik untuk mengubah
       </button>
     </div>
