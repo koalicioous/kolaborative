@@ -157,6 +157,10 @@ export default function CreateTalentInput(
           <button
             type="button"
             className="transition-all hover:shadow hover:bg-red-200 w-20 mr-2 pt-3 pl-3 text-red-700 h-12 rounded-md bg-red-100 border-red-300 flex items-center justify-center"
+            onClick={() => {
+              dispatch({ type: NewProjectTalentActionType.REMOVE_TALENT, payload: newTalent });
+              return editTalent('');
+            }}
           >
             <DeleteIconSolid className="w-8 h-8" />
           </button>
