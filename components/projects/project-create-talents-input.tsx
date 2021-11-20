@@ -22,11 +22,14 @@ const defaultTalent = {
 interface CreateTalentInputProps {
   isEditing: boolean,
   talent?: Talent,
-  editTalent: Dispatch<SetStateAction<string>>
+  editTalent: Dispatch<SetStateAction<string>>,
+  cancelEdit: Dispatch<SetStateAction<boolean>>,
 }
 
 export default function CreateTalentInput(
-  { isEditing, talent, editTalent } : CreateTalentInputProps,
+  {
+    isEditing, talent, editTalent, cancelEdit,
+  } : CreateTalentInputProps,
 ) {
   const [newTalent, setNewTalent] = useState<Talent>(talent || defaultTalent);
   const [validation, setValidation] = useState({
@@ -35,7 +38,7 @@ export default function CreateTalentInput(
   });
 
   const [edit] = useState<boolean|undefined>(isEditing);
-  const { dispatch } = useStore();
+  const { project, dispatch } = useStore();
 
   const handleAddSkill = (skill: {id: string, text: string}) => setNewTalent({
     ...newTalent,
@@ -60,7 +63,7 @@ export default function CreateTalentInput(
   };
 
   return (
-    <div className={`border-b flex flex-col  ${edit ? 'p-3 border rounded-md border-gray-200' : 'border-gray-100'}`}>
+    <div className={`border-b flex flex-col  ${edit || project.talents.length > 0 ? 'p-3 border rounded-md border-gray-200' : 'border-gray-100'}`}>
       <div className="grid grid-cols-4 gap-3">
         <label htmlFor="major" className="block col-span-3">
           <div>
@@ -93,7 +96,6 @@ export default function CreateTalentInput(
                 <option
                   value={index + 1}
                   key={Math.random()}
-                  // selected={newTalent.amount === (index + 1)}
                 >
                   {index + 1}
                 </option>
@@ -173,13 +175,14 @@ export default function CreateTalentInput(
         </button>
       </div>
       {
-        edit
+        (edit || project.talents.length > 0)
         && (
           <button
             type="button"
             className="-mx-3 -mb-3 mt-3 py-3 border-t border-gray-200 text-sm text-gray-500 font-medium bg-gray-100 hover:bg-gray-200 transition-all"
             onClick={() => {
-              editTalent('');
+              if (edit) return editTalent('');
+              return cancelEdit(false);
             }}
           >
             Batalkan

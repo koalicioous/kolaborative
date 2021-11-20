@@ -10,7 +10,7 @@ interface TalentItemProps {
 
 export default function TalentItem({ talent, editTalent }: TalentItemProps) {
   return (
-    <div className="p-4 bg-blue-50 rounded-md flex flex-col">
+    <div className="p-4 bg-blue-50 rounded-md flex flex-col border">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <GraduationHatSolid className="pt-1 h-8 w-6 text-blue-600 flex justify-center items-center -my-1" />
