@@ -52,8 +52,20 @@ export default function CreateTalentInput(
 
   const handleInsertTalent = () => {
     if (newTalent.major && newTalent.description) {
+      if (edit) {
+        dispatch(
+          {
+            type: NewProjectTalentActionType.EDIT_TALENT,
+            payload: newTalent,
+          },
+        );
+        return editTalent('');
+      }
       return dispatch(
-        { type: NewProjectTalentActionType.INSERT_TALENT, payload: { ...newTalent, id: uuid4() } },
+        {
+          type: NewProjectTalentActionType.INSERT_TALENT,
+          payload: { ...newTalent, id: uuid4() },
+        },
       );
     }
     return setValidation({
