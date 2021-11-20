@@ -10,7 +10,7 @@ export default function ProjectCreateTalents() {
   const [idEdited, setIdEdited] = useState<string>('');
   const activeClass: string = 'bg-blue-50 text-blue-600';
   const disabledClass: string = 'bg-gray-50 text-gray-400 border border-gray-200';
-  const pushButtonClass: string = project.talents.length > 0 && !isCreating
+  const pushButtonClass: string = project.talents.length > 0 && !isCreating && !idEdited
     ? activeClass : disabledClass;
 
   useEffect(() => {
