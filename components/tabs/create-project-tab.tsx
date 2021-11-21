@@ -1,6 +1,6 @@
 import Link from 'next/link';
 import { STEP_DETAIL, STEP_TALENT } from '../../constants/global';
-import { useStore } from '../../lib/stores/createProject';
+import { useStore } from '../../lib/newProject/stores/createProject';
 import InfoCircleSolid from '../ui/icons/solid/info-circle';
 import UsersSolid from '../ui/icons/solid/users';
 

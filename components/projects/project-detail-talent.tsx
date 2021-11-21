@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useState, useEffect } from 'react';
-import { Project } from '../../lib/data/project';
+import { Project } from '../../lib/newProject/data/project';
 import ChevronDownIcon from '../ui/icons/outline/chevron-down-icon';
 
 interface ProjectDetailTalentProps {

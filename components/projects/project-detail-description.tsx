@@ -1,4 +1,4 @@
-import { Project } from '../../lib/data/project';
+import { Project } from '../../lib/newProject/data/project';
 
 interface ProjectDetailDescriptionProps {
   project: Project

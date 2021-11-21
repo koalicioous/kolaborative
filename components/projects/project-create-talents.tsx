@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
-import { Talent } from '../../lib/data/project';
-import { useStore } from '../../lib/stores/createProject';
+import { Talent } from '../../lib/newProject/data/project';
+import { useStore } from '../../lib/newProject/stores/createProject';
 import CreateTalentInput from './project-create-talents-input';
 import TalentItem from './project-create-talents-item';
 

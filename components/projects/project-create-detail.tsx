@@ -1,7 +1,7 @@
 import Image from 'next/image';
-import { NewProjectDetailActionType } from '../../lib/actions/NewProjectDetailAction';
-import { Goal } from '../../lib/data/project';
-import { useStore } from '../../lib/stores/createProject';
+import { NewProjectDetailActionType } from '../../lib/newProject/actions/NewProjectDetailAction';
+import { Goal } from '../../lib/newProject/data/project';
+import { useStore } from '../../lib/newProject/stores/createProject';
 
 export default function ProjectCreateDetail() {
   const { project, dispatch } = useStore();

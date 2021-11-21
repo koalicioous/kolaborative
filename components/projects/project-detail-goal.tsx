@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unescaped-entities */
-import { Project } from '../../lib/data/project';
+import { Project } from '../../lib/newProject/data/project';
 
 interface ProjectDetailDetailProps {
   project: Project

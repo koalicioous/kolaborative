@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { ReactElement } from 'react';
 import Head from 'next/head';
 import WithoutBottomNavbarLayout from '../../components/layout/base/without-bottom-navbar-layout';
-import { Project } from '../../lib/data/project';
+import { Project } from '../../lib/newProject/data/project';
 import ProjectDetailTitle from '../../components/projects/project-detail-title';
 import ProjectDetailDescription from '../../components/projects/project-detail-description';
 import ProjectDetailGoal from '../../components/projects/project-detail-goal';

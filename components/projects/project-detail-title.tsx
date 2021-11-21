@@ -1,4 +1,4 @@
-import { Project } from '../../lib/data/project';
+import { Project } from '../../lib/newProject/data/project';
 import ClockIconSolid from '../ui/icons/solid/clock-icon';
 import UserIconSolid from '../ui/icons/solid/user-icon';
 

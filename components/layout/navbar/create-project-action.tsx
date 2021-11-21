@@ -1,4 +1,4 @@
-import { useStore } from '../../../lib/stores/createProject';
+import { useStore } from '../../../lib/newProject/stores/createProject';
 
 export default function CreateProjectAction() {
   const { project } = useStore();

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import UsersSolid from '../ui/icons/solid/users';
-import { Talent } from '../../lib/data/project';
+import { Talent } from '../../lib/newProject/data/project';
 import GraduationHatSolid from '../ui/icons/solid/graduation-hat';
 
 interface TalentItemProps {
