@@ -1,4 +1,6 @@
 import { SetStateAction, Dispatch } from 'react';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {
   InitialMajors,
   InitialSkills,
@@ -13,16 +15,19 @@ const FILTER = [
     id: FilterModalMode.Jurusan,
     name: 'Jurusan',
     items: InitialMajors,
+    icon: faGraduationCap,
   },
   {
     id: FilterModalMode.Keahlian,
     name: 'Keahlian',
     items: InitialSkills,
+    icon: faBrain,
   },
   {
     id: FilterModalMode.Event,
     name: 'Event',
     items: InitialEvents,
+    icon: faCalendarAlt,
   },
 ];
 
@@ -41,13 +46,21 @@ export default function SearchFilter({ openModal } : SearchFilterProps) {
             <button
               type="button"
               key={filter.name}
-              className={`transition-all border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-1 flex items-center justify-center ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
+              className={`transition-all border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-2 flex items-center justify-center ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
               onClick={() => openModal({
                 visible: true, data: filter.items, title: filter.name, mode: filter.id,
               })}
             >
-              <span className="ml-1">
-                {`${filter.name}${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? ` | ${filters[filter.id].length}` : ''}`}
+              <FontAwesomeIcon icon={filter.icon} className="text-blue-300" />
+              <span className="ml-2 flex items-center">
+                {filter.name}
+                {Object.keys(filters).includes(filter.id)
+                && filters[filter.id].length > 0
+                && (
+                  <div className="w-6 h-6 text-sm bg-blue-500 rounded-full flex items-center justify-center ml-2">
+                    {filters[filter.id].length}
+                  </div>
+                )}
               </span>
             </button>
           ))
