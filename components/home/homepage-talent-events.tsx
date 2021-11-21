@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import CalendarSolid from '../ui/icons/solid/calendar-icon';
+import EllipsisIconSolid from '../ui/icons/solid/ellipsis';
 
 export default function HomePageTalentEvents() {
   const EVENTS = [
@@ -10,7 +11,7 @@ export default function HomePageTalentEvents() {
   ];
 
   return (
-    <div className="max-w-lg m-auto py-4 px-5 bg-white">
+    <div className="max-w-lg m-auto py-3 px-5 bg-white">
       <div className="flex items-center">
         <CalendarSolid className="w-6 h-6 text-yellow-500" />
         <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600 pt-1">
@@ -28,7 +29,8 @@ export default function HomePageTalentEvents() {
       </div>
       <div className="mt-4 text-center">
         <Link href="/">
-          <a className="inline-block text-blue-700 text-sm">
+          <a className="flex items-center justify-center text-blue-700 text-sm">
+            <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
             Lihat semua Event
           </a>
         </Link>

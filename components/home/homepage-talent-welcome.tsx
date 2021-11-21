@@ -20,7 +20,7 @@ export default function HomePageTalentWelcome() {
       </div>
       <div className="flex">
         <Link href="/create-project">
-          <a className="rounded-md py-2 w-full text-center bg-blue-600 text-blue-50 font-semibold text-sm shadow-md">
+          <a className="transition-all rounded-md py-2 w-full text-center bg-blue-600 hover:bg-blue-700 text-blue-50 font-semibold text-sm shadow-md">
             + Mulai Proyek Baru
           </a>
         </Link>

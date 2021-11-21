@@ -1,7 +1,11 @@
+.major:hover {
+    opacity: 100% !important;
+    filter: none !important;
+}
+
 .ReactTags__tags {
     position: relative;
 }
-
 
 .ReactTags__tagInputField {
     margin-top: 8px;

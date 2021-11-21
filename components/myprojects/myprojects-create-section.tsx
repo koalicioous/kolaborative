@@ -1,4 +1,4 @@
-import NextLink from 'next/link';
+import Link from 'next/link';
 
 export default function MyProjectsCreateSection() {
   return (
@@ -9,11 +9,11 @@ export default function MyProjectsCreateSection() {
       <p className="mt-2 text-xs">
         Dapatkan talenta yang tepat untuk proyekmu
       </p>
-      <NextLink href="/create-project">
+      <Link href="/create-project">
         <a className="transition-all bg-blue-600 text-white w-full p-3 mt-4 text-center rounded-md hover:bg-blue-700">
           + Buat Proyek Baru
         </a>
-      </NextLink>
+      </Link>
     </div>
   );
 }

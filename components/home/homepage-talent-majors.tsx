@@ -1,6 +1,7 @@
 import Link from 'next/link';
 import Image from 'next/image';
 import GraduationHatSolid from '../ui/icons/solid/graduation-hat';
+import EllipsisIconSolid from '../ui/icons/solid/ellipsis';
 
 export default function HomePageTalentMajors() {
   const MAJORS = [
@@ -62,30 +63,34 @@ export default function HomePageTalentMajors() {
           Proyek Berdasarkan Jurusan
         </h2>
       </div>
-      <ul className="grid grid-cols-2 gap-2 mt-4">
+      <div className="grid grid-cols-2 gap-2 mt-4 group">
         {
           MAJORS.map((major) => (
-            <li
-              className="py-2 px-2 md:px-4 flex items-center shadow-md border-2 border-white text-center rounded-lg font-bold text-sm text-white"
-              style={{ background: `linear-gradient(90deg, ${major.gradientFrom} 40.94%, ${major.gradientTo} 90.31%)` }}
-              key={major.name}
-            >
-              <Image
-                src={major.icon}
-                width={16}
-                height={16}
-              />
-              <span className="ml-3 text-xs md:text-sm">
-                { major.name }
-              </span>
-            </li>
+            <Link href="/" key={major.name}>
+              <a
+                className="transition-all ease-in-out duration-150 transform filter hover:scale-105 group-hover:opacity-50 py-2 px-2 md:px-4 flex items-center major hover:shadow-xl border-2 border-white text-center rounded-lg font-bold text-sm text-white"
+                style={{ background: `linear-gradient(90deg, ${major.gradientFrom} 40.94%, ${major.gradientTo} 90.31%)` }}
+              >
+                <Image
+                  src={major.icon}
+                  width={16}
+                  height={16}
+                />
+                <span className="ml-3 text-xs md:text-sm">
+                  { major.name }
+                </span>
+              </a>
+            </Link>
           ))
         }
-      </ul>
+      </div>
       <div className="mt-4 text-center">
         <Link href="/">
-          <a className="inline-block text-blue-700 text-sm">
-            Lihat semua jurusan (131)
+          <a className="text-blue-700 text-sm flex items-center justify-center">
+            <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
+            <span>
+              Lihat semua jurusan (131)
+            </span>
           </a>
         </Link>
       </div>

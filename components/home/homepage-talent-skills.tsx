@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import BrainIconSolid from '../ui/icons/solid/brain-icon';
+import EllipsisIconSolid from '../ui/icons/solid/ellipsis';
 
 export default function HomePageTalentSkills() {
   const SKILLS = [
@@ -7,7 +8,7 @@ export default function HomePageTalentSkills() {
   ];
 
   return (
-    <div className="max-w-lg m-auto py-4 px-5 bg-white">
+    <div className="max-w-lg m-auto py-3 px-5 bg-white">
       <div className="flex items-center">
         <BrainIconSolid className="w-8 h-8 mt-2 text-yellow-500" />
         <h2 className="text-md md:text-xl font-bold text-blue-600">
@@ -23,8 +24,11 @@ export default function HomePageTalentSkills() {
       </ul>
       <div className="mt-3 text-center">
         <Link href="/">
-          <a className="inline-block text-blue-700 text-sm">
-            Lihat semua keahlian
+          <a className="flex items-center justify-center text-blue-700 text-sm">
+            <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
+            <span>
+              Lihat semua keahlian
+            </span>
           </a>
         </Link>
       </div>
