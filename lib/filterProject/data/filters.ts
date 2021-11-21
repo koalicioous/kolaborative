@@ -51,13 +51,4 @@ export const InitialEvents: Event[] = [
   { id: '3', name: 'Gemastik' },
 ];
 
-export const InitialFilters: Filters = {
-  majors: [
-    { id: 'informatika', name: 'informatika' },
-    { id: 'teknik industri', name: 'teknik industri' },
-  ],
-  events: [
-    { id: '1', name: 'Pekan Kreativitas Mahasiswa' },
-    { id: '2', name: 'Business Case Competition' },
-  ]
-};
+export const InitialFilters: Filters = {};

@@ -4,6 +4,7 @@ import {
   useEffect,
   useState,
 } from 'react';
+import { SetFilterActionType } from '../../lib/filterProject/action/setFilterAction';
 import {
   FilterProp,
   Major,
@@ -29,7 +30,10 @@ export default function SearchFilterModal({
   const [filter, setFilter] = useState<Major[]|Skill[]|Event[]>([]);
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [modalMode] = useState<FilterModalMode>(mode);
-  const { filters } = useFilterStore();
+  const [dispatchType, setDispatchType] = useState<SetFilterActionType>(
+    SetFilterActionType.RESET_FILTERS,
+  );
+  const { filters, dispatch } = useFilterStore();
 
   useEffect(() => {
     setActiveIds(filter.map((item) => item.id));
@@ -48,24 +52,25 @@ export default function SearchFilterModal({
         });
       });
     })();
-    // (() => {
-    //   switch (modalMode) {
-    //     case FilterModalMode.Jurusan:
-    //       return setModalMode(FilterModalMode.Jurusan);
-    //     case FilterModalMode.Keahlian:
-    //       return setMode(FilterModalMode.Keahlian);
-    //     case FilterModalMode.Event:
-    //       return setMode(FilterModalMode.Event);
-    //     default:
-    //       return false;
-    //   }
-    // })();
     (() => {
-      const ids: string[] = [...filters[mode].map((item: Major | Skill | Event) => item.id)];
+      const ids: string[] = filters[mode]
+        ? [...filters[mode].map((item: Major | Skill | Event) => item.id)] : [];
       const activeFilters: Major[] | Skill[] | Event[] = data.filter(
         (item) => ids.includes(item.id),
       );
       return setFilter(activeFilters);
+    })();
+    (() => {
+      switch (mode) {
+        case FilterModalMode.Jurusan:
+          return setDispatchType(SetFilterActionType.SET_MAJORS);
+        case FilterModalMode.Keahlian:
+          return setDispatchType(SetFilterActionType.SET_SKILLS);
+        case FilterModalMode.Event:
+          return setDispatchType(SetFilterActionType.SET_EVENTS);
+        default:
+          return setDispatchType(SetFilterActionType.RESET_FILTERS);
+      }
     })();
   }, []);
 
@@ -137,10 +142,29 @@ export default function SearchFilterModal({
           </ul>
         </div>
         <div className="grid grid-cols-3 gap-2">
-          <button type="button" className="text-blue-600 hover:bg-blue-50 py-3 rounded-md">
+          <button
+            type="button"
+            className={`py-3 rounded-md ${filter.length > 0 ? 'text-blue-600 hover:bg-blue-50' : 'text-gray-500 hover:bg-gray-50'}`}
+            onClick={() => setFilter([])}
+            disabled={filter.length < 1}
+          >
             Reset
           </button>
-          <button type="button" className="transition-all text-white bg-blue-600 hover:bg-blue-700 col-span-2 py-3 rounded-md font-semibold">
+          <button
+            type="button"
+            className="transition-all text-white bg-blue-600 hover:bg-blue-700 col-span-2 py-3 rounded-md font-semibold"
+            onClick={() => {
+              dispatch({
+                type: dispatchType,
+                payload: {
+                  [mode]: filter,
+                },
+              });
+              return closeModal({
+                visible: false, data: [], title: '', mode: modalMode,
+              });
+            }}
+          >
             Terapkan
           </button>
         </div>
