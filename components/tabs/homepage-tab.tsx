@@ -8,8 +8,8 @@ interface HomePageTabProps {
 export default function HomePageTab({ mode }: HomePageTabProps) {
   const isTalentMode: boolean = mode ? mode === MODE_TALENT : true;
   const isOwnerMode: boolean = mode === MODE_OWNER;
-  const activeClass: string = 'text-indigo-900';
-  const inactiveClass: string = 'bg-indigo-100 text-indigo-900';
+  const activeClass: string = 'text-blue-900';
+  const inactiveClass: string = 'bg-blue-100 text-blue-900';
   const talentLinkClass: string = isTalentMode ? activeClass : inactiveClass;
   const ownerLinkClass: string = isOwnerMode ? activeClass : inactiveClass;
 

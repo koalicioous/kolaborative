@@ -21,7 +21,7 @@ const BottomNavbar: FC = () => {
                 <a
                   className={clsx(
                     'p-2 text-xs text-center flex flex-col justify-center items-center',
-                    isActive ? 'text-indigo-700' : 'text-gray-600',
+                    isActive ? 'text-blue-700' : 'text-gray-600',
                   )}
                 >
                   {menu.icon}

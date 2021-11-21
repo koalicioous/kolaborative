@@ -13,7 +13,7 @@ export default function PrimaryButton({
     <button
       type={type ?? 'button'}
       className={clsx(
-        'bg-indigo-700 text-white',
+        'bg-blue-700 text-white',
         className,
         buttonSizes(size),
       )}
