@@ -2,7 +2,7 @@ import Head from 'next/head';
 import { useState } from 'react';
 import { FilterModalMode, FilterProp } from '../../lib/filterProject/data/filters';
 import SearchHeader from '../../components/layout/header/search-header';
-import SearchMajors from '../../components/search/search-majors';
+// import SearchMajors from '../../components/search/search-majors';
 import SearchTopProjects from '../../components/search/search-top-projects';
 import SearchFilter from '../../components/search/search-filters';
 import SearchFilterModal from '../../components/search/search-filter-modal';
@@ -28,7 +28,7 @@ export default function Search() {
         <FiltersContextProvider>
           <SearchHeader keyword={keyword} setKeyword={setKeyword} />
           <SearchFilter openModal={setModal} />
-          <SearchMajors />
+          {/* <SearchMajors /> */}
           <SearchTopProjects />
           <>
             {

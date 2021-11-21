@@ -29,6 +29,7 @@ export default function SearchFilterModal({
 }: SearchFilterModalProps) {
   const [filter, setFilter] = useState<Major[]|Skill[]|Event[]>([]);
   const [activeIds, setActiveIds] = useState<string[]>([]);
+  const [searchFilterKeyword, setSearchFilterKeyword] = useState<string>('');
   const [modalMode] = useState<FilterModalMode>(mode);
   const [dispatchType, setDispatchType] = useState<SetFilterActionType>(
     SetFilterActionType.RESET_FILTERS,
@@ -107,36 +108,48 @@ export default function SearchFilterModal({
           </button>
         </div>
         <div className="overflow-auto pb-4">
+          <div>
+            <input
+              type="text"
+              name="filterKeyword"
+              id="filterKeyword"
+              placeholder={`Ketik ${title} yang kamu cari`}
+              className="rounded-md border p-3 w-full my-3"
+              value={searchFilterKeyword}
+              onChange={(e) => setSearchFilterKeyword(e.target.value)}
+            />
+          </div>
           <ul>
             {
-              data.map((item) => (
-                <li key={item.id} className="my-2">
-                  <label htmlFor={item.id} className="flex items-center">
-                    <input
-                      type="checkbox"
-                      name={title}
-                      id={item.id}
-                      className="w-4 h-4"
-                      value={item.id}
-                      checked={activeIds.includes(item.id)}
-                      onChange={(e) => {
-                        switch (e.target.checked) {
-                          case false:
-                            return setFilter(
-                              [...filter.filter((removeTarget) => removeTarget.id !== item.id)],
-                            );
-                          case true:
-                            return setFilter(
-                              [...filter, item],
-                            );
-                          default:
-                            return false;
-                        }
-                      }}
-                    />
-                    <span className="ml-2">{item.name}</span>
-                  </label>
-                </li>
+              data.filter((item) => item.name.toLowerCase()
+                .includes(searchFilterKeyword)).map((item) => (
+                  <li key={item.id} className="my-2">
+                    <label htmlFor={item.id} className="flex items-center">
+                      <input
+                        type="checkbox"
+                        name={title}
+                        id={item.id}
+                        className="w-4 h-4"
+                        value={item.id}
+                        checked={activeIds.includes(item.id)}
+                        onChange={(e) => {
+                          switch (e.target.checked) {
+                            case false:
+                              return setFilter(
+                                [...filter.filter((removeTarget) => removeTarget.id !== item.id)],
+                              );
+                            case true:
+                              return setFilter(
+                                [...filter, item],
+                              );
+                            default:
+                              return false;
+                          }
+                        }}
+                      />
+                      <span className="ml-2">{item.name}</span>
+                    </label>
+                  </li>
               ))
             }
           </ul>

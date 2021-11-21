@@ -34,15 +34,14 @@ export default function SearchFilter({ openModal } : SearchFilterProps) {
   const { filters } = useFilterStore();
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
-  console.log(Object.keys(filters));
   return (
-    <section className="max-w-lg mx-auto p-3 mt-14 bg-white grid grid-cols-3 gap-2">
+    <section className="max-w-lg mx-auto px-3 py-5 mt-14 bg-white grid grid-cols-3 gap-2">
       {
           FILTER.map((filter) => (
             <button
               type="button"
               key={filter.name}
-              className={`transition-all border border-blue-600 hover:text-white font-semibold rounded-lg py-1 flex items-center justify-center ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
+              className={`transition-all border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-1 flex items-center justify-center ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
               onClick={() => openModal({
                 visible: true, data: filter.items, title: filter.name, mode: filter.id,
               })}
