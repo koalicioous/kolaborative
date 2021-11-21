@@ -9,7 +9,7 @@ import SearchFilterModal from '../../components/search/search-filter-modal';
 import { FiltersContextProvider } from '../../lib/filterProject/store/filters';
 
 export default function Search() {
-  const [keyword, setKeyword] = useState('');
+  const [keyword, setKeyword] = useState<string>('');
   const [modal, setModal] = useState<FilterProp>({
     visible: false,
     data: [],
@@ -21,12 +21,12 @@ export default function Search() {
     <>
       <Head>
         <title>
-          { keyword ? `Search result of ${keyword} - Kolaborative` : 'Search Projects - Kolaborative' }
+          { `${keyword ? `Mencari ${keyword}` : 'Pencarian'} — Kolaborative` }
         </title>
       </Head>
       <main className="bg-gray-50 min-h-screen absolute w-screen z-10">
         <FiltersContextProvider>
-          <SearchHeader keyword={keyword} setKeyword={setKeyword} />
+          <SearchHeader setKeyword={setKeyword} />
           <SearchFilter openModal={setModal} />
           {/* <SearchMajors /> */}
           <SearchTopProjects />

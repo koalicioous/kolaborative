@@ -51,7 +51,7 @@ export default function SearchFilter({ openModal } : SearchFilterProps) {
               </span>
             </button>
           ))
-      }
+        }
     </section>
   );
 }

@@ -5,7 +5,7 @@ import {
   ReactElement,
 } from 'react';
 import { InitialFilters } from '../data/filters';
-import FilterReducer from '../reducers/fiter-reducer';
+import FilterReducer from '../reducers/filter-reducer';
 
 const FilterContext = createContext<any>({});
 FilterContext.displayName = 'Filters Context';

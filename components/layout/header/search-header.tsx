@@ -1,23 +1,21 @@
 /* eslint-disable no-unused-vars */
 import { useRouter } from 'next/router';
 import { FormEvent, useEffect, useRef } from 'react';
+import { SetFilterActionType } from '../../../lib/filterProject/action/setFilterAction';
+import { useFilterStore } from '../../../lib/filterProject/store/filters';
 
 interface SearchHeaderProps {
-  keyword: string,
-  setKeyword: (keyword: string) => void
+  setKeyword: (keyword:string) => void
 }
 
-export default function SearchHeader({ keyword, setKeyword }: SearchHeaderProps) {
+export default function SearchHeader({ setKeyword } : SearchHeaderProps) {
   const router = useRouter();
+  const { filters, dispatch } = useFilterStore();
   const searchInputRef = useRef<HTMLInputElement>(null);
 
   useEffect(() => {
     searchInputRef.current?.focus();
   });
-
-  function handleKeywordChange(event: FormEvent<HTMLInputElement>) {
-    return setKeyword(event.currentTarget.value);
-  }
 
   return (
     <header className="fixed w-full bg-white shadow h-14 z-20">
@@ -29,11 +27,19 @@ export default function SearchHeader({ keyword, setKeyword }: SearchHeaderProps)
         </button>
         <input
           ref={searchInputRef}
-          value={keyword}
+          value={filters.keyword || ''}
           type="text"
           placeholder="Ketik untuk mencari proyek atau gunakan filter"
           className="flex-1 px-4 py-2 text-sm focus:outline-none"
-          onChange={handleKeywordChange}
+          onChange={(e) => {
+            setKeyword(e.target.value);
+            dispatch({
+              type: SetFilterActionType.SET_KEYWORD,
+              payload: {
+                keyword: e.target.value,
+              },
+            });
+          }}
         />
       </div>
     </header>
