@@ -1,6 +1,6 @@
 import Head from 'next/head';
 import { useState } from 'react';
-import { FilterProp } from '../../lib/filterProject/data/filters';
+import { FilterModalMode, FilterProp } from '../../lib/filterProject/data/filters';
 import SearchHeader from '../../components/layout/header/search-header';
 import SearchMajors from '../../components/search/search-majors';
 import SearchTopProjects from '../../components/search/search-top-projects';
@@ -14,6 +14,7 @@ export default function Search() {
     visible: false,
     data: [],
     title: '',
+    mode: FilterModalMode.Jurusan,
   });
 
   return (
@@ -32,7 +33,14 @@ export default function Search() {
           <>
             {
               modal.visible
-              && <SearchFilterModal closeModal={setModal} data={modal.data} title={modal.title} />
+              && (
+              <SearchFilterModal
+                closeModal={setModal}
+                data={modal.data}
+                title={modal.title}
+                mode={modal.mode}
+              />
+              )
             }
           </>
         </FiltersContextProvider>

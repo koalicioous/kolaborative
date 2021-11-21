@@ -17,12 +17,18 @@ interface SearchFilterModalProps {
     closeModal: Dispatch<SetStateAction<FilterProp>>,
     title: string,
     data: Major[] | Skill[] | Event[],
+    mode: FilterModalMode,
 }
 
-export default function SearchFilterModal({ closeModal, data, title }: SearchFilterModalProps) {
+export default function SearchFilterModal({
+  closeModal,
+  data,
+  title,
+  mode,
+}: SearchFilterModalProps) {
   const [filter, setFilter] = useState<Major[]|Skill[]|Event[]>([]);
   const [activeIds, setActiveIds] = useState<string[]>([]);
-  const [mode, setMode] = useState<FilterModalMode>(FilterModalMode.Jurusan);
+  const [modalMode] = useState<FilterModalMode>(mode);
   const { filters } = useFilterStore();
 
   useEffect(() => {
@@ -32,24 +38,28 @@ export default function SearchFilterModal({ closeModal, data, title }: SearchFil
     (() => {
       const BG = document.getElementById('background');
       BG?.addEventListener('click', () => {
-        closeModal({ visible: false, data: [], title: '' });
+        closeModal({
+          visible: false, data: [], title: '', mode: modalMode,
+        });
       });
       return BG?.removeEventListener('click', () => {
-        closeModal({ visible: false, data: [], title: '' });
+        closeModal({
+          visible: false, data: [], title: '', mode: modalMode,
+        });
       });
     })();
-    (() => {
-      switch (mode) {
-        case FilterModalMode.Jurusan:
-          return setMode(FilterModalMode.Jurusan);
-        case FilterModalMode.Keahlian:
-          return setMode(FilterModalMode.Keahlian);
-        case FilterModalMode.Event:
-          return setMode(FilterModalMode.Event);
-        default:
-          return false;
-      }
-    })();
+    // (() => {
+    //   switch (modalMode) {
+    //     case FilterModalMode.Jurusan:
+    //       return setModalMode(FilterModalMode.Jurusan);
+    //     case FilterModalMode.Keahlian:
+    //       return setMode(FilterModalMode.Keahlian);
+    //     case FilterModalMode.Event:
+    //       return setMode(FilterModalMode.Event);
+    //     default:
+    //       return false;
+    //   }
+    // })();
     (() => {
       const ids: string[] = [...filters[mode].map((item: Major | Skill | Event) => item.id)];
       const activeFilters: Major[] | Skill[] | Event[] = data.filter(
@@ -82,7 +92,9 @@ export default function SearchFilterModal({ closeModal, data, title }: SearchFil
             type="button"
             className="transition-all rounded-full hover:bg-gray-100 text-gray-500 flex items-centr py-1 px-3"
             onClick={() => {
-              closeModal({ visible: false, data: [], title: '' });
+              closeModal({
+                visible: false, data: [], title: '', mode,
+              });
             }}
           >
             <div className="transform rotate-45 font-bold">+</div>
