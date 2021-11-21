@@ -26,6 +26,12 @@ export interface FilterProp {
     data: Major[] | Skill [] | Event[] | []
 }
 
+export enum FilterModalMode {
+  'Jurusan' = 'majors',
+  'Keahlian' = 'skills',
+  'Event' = 'events',
+}
+
 export const InitialMajors: Major[] = [
   { id: 'informatika', name: 'informatika' },
   { id: 'teknik industri', name: 'teknik industri' },
@@ -43,3 +49,10 @@ export const InitialEvents: Event[] = [
   { id: '2', name: 'Business Case Competition' },
   { id: '3', name: 'Gemastik' },
 ];
+
+export const InitialFilters: Filters = {
+  majors: [
+    { id: 'informatika', name: 'informatika' },
+    { id: 'teknik industri', name: 'teknik industri' },
+  ]
+};

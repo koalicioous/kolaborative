@@ -6,6 +6,7 @@ import SearchMajors from '../../components/search/search-majors';
 import SearchTopProjects from '../../components/search/search-top-projects';
 import SearchFilter from '../../components/search/search-filters';
 import SearchFilterModal from '../../components/search/search-filter-modal';
+import { FiltersContextProvider } from '../../lib/filterProject/store/filters';
 
 export default function Search() {
   const [keyword, setKeyword] = useState('');
@@ -23,14 +24,18 @@ export default function Search() {
         </title>
       </Head>
       <main className="bg-gray-50 min-h-screen absolute w-screen z-10">
-        <SearchHeader keyword={keyword} setKeyword={setKeyword} />
-        <SearchFilter openModal={setModal} />
-        <SearchMajors />
-        <SearchTopProjects />
-        {
-          modal.visible
-          && <SearchFilterModal closeModal={setModal} data={modal.data} title={modal.title} />
-        }
+        <FiltersContextProvider>
+          <SearchHeader keyword={keyword} setKeyword={setKeyword} />
+          <SearchFilter openModal={setModal} />
+          <SearchMajors />
+          <SearchTopProjects />
+          <>
+            {
+              modal.visible
+              && <SearchFilterModal closeModal={setModal} data={modal.data} title={modal.title} />
+            }
+          </>
+        </FiltersContextProvider>
       </main>
     </>
   );

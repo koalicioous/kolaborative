@@ -10,5 +10,10 @@ export enum SetFilterActionType {
 
 export interface SetFilterAction {
     type: SetFilterActionType,
-    payload: Major[] | Skill[] | Event[] | string
+    payload: {
+        keyword?: string,
+        majors?: Major[],
+        skills?: Skill[],
+        events?: Event[],
+    }
 }
