@@ -1,4 +1,6 @@
-import { useState, Dispatch, SetStateAction } from 'react';
+import {
+  useState, Dispatch, SetStateAction,
+} from 'react';
 import { v4 as uuid4 } from 'uuid';
 import { WithContext as ReactTags } from 'react-tag-input';
 import DeleteIconSolid from '../ui/icons/solid/delete-icon';

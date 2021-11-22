@@ -102,7 +102,7 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
   return (
     <section className="max-w-lg mx-auto px-3 py-3 mt-14 bg-white flex overflow-x-auto">
       {
-          FILTER.map((filter, index) => (
+          FILTER.map((filter) => (
             <button
               type="button"
               key={filter.name}
