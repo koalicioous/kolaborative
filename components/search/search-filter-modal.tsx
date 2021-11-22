@@ -114,7 +114,7 @@ export default function SearchFilterModal({
               name="filterKeyword"
               id="filterKeyword"
               placeholder={`Ketik ${title} yang kamu cari`}
-              className="rounded-md border p-3 w-full my-3"
+              className="rounded-md border text-base p-3 w-full my-3"
               value={searchFilterKeyword}
               onChange={(e) => setSearchFilterKeyword(e.target.value)}
             />

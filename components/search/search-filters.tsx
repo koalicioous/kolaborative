@@ -100,19 +100,21 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
   }, [query]);
 
   return (
-    <section className="max-w-lg mx-auto px-3 py-5 mt-14 bg-white grid grid-cols-3 gap-2">
+    <section className="max-w-lg mx-auto px-3 py-3 mt-14 bg-white flex overflow-x-auto">
       {
-          FILTER.map((filter) => (
+          FILTER.map((filter, index) => (
             <button
               type="button"
               key={filter.name}
-              className={`transition-all border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-2 flex items-center justify-center ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
+              className={`transition-all mr-2 flex-grow border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-2 flex items-center justify-start px-5 ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
               onClick={() => openModal({
                 visible: true, data: filter.items, title: filter.name, mode: filter.id,
               })}
             >
-              <FontAwesomeIcon icon={filter.icon} className="text-blue-300" />
-              <span className="ml-2 flex items-center">
+              <div className="w-8">
+                <FontAwesomeIcon icon={filter.icon} className="text-blue-300" />
+              </div>
+              <span className="ml-2 flex items-center justify-between w-full">
                 {filter.name}
                 {Object.keys(filters).includes(filter.id)
                 && filters[filter.id].length > 0

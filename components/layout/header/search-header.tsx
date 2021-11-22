@@ -29,8 +29,8 @@ export default function SearchHeader({ setKeyword } : SearchHeaderProps) {
           ref={searchInputRef}
           value={filters.keyword || ''}
           type="text"
-          placeholder="Ketik untuk mencari proyek atau gunakan filter"
-          className="flex-1 px-4 py-2 text-sm focus:outline-none"
+          placeholder="Cari proyek seru"
+          className="flex-1 pr-2 py-2 text-base focus:outline-none"
           onChange={(e) => {
             setKeyword(e.target.value);
             dispatch({
