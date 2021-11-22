@@ -9,6 +9,9 @@ import {
   InitialEvents,
   FilterProp,
   FilterModalMode,
+  Major,
+  Skill,
+  Event,
 } from '../../lib/filterProject/data/filters';
 import { useFilterStore } from '../../lib/filterProject/store/filters';
 import { SetFilterActionType } from '../../lib/filterProject/action/setFilterAction';
@@ -71,16 +74,16 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
                   payload: {
                     [parameter]: [filterProperty.items.find(
                       (item) => item.name.toLowerCase() === String(query[parameter]),
-                    )],
+                    )].filter((item) => item !== undefined),
                   },
                 });
               case true:
                 return dispatch({
                   type: determineActionType(parameter),
                   payload: {
-                    [parameter]: query[parameter]?.filter((item: string) => {
-                      if (filterProperty.items.find(
-                        (filter) => filter.name.toLowerCase() === item.toLowerCase(),
+                    [parameter]: filterProperty.items.filter((item: Major | Skill | Event) => {
+                      if (query[parameter].find(
+                        (target: string) => item.name.toLowerCase() === target.toLowerCase(),
                       )) return true;
                       return false;
                     }),
