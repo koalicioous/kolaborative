@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { FilterModalMode, FilterProp } from '../../lib/filterProject/data/filters';
 import SearchHeader from '../../components/layout/header/search-header';
@@ -16,6 +17,7 @@ export default function Search() {
     title: '',
     mode: FilterModalMode.Jurusan,
   });
+  const { query } = useRouter();
 
   return (
     <>
@@ -27,7 +29,7 @@ export default function Search() {
       <main className="bg-gray-50 min-h-screen absolute w-screen z-10">
         <FiltersContextProvider>
           <SearchHeader setKeyword={setKeyword} />
-          <SearchFilter openModal={setModal} />
+          <SearchFilter openModal={setModal} query={query} />
           {/* <SearchMajors /> */}
           <SearchTopProjects />
           <>

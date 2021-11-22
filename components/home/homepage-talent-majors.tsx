@@ -8,48 +8,56 @@ export default function HomePageTalentMajors() {
     {
       name: 'Teknik Informatika',
       icon: '/informatika.svg',
+      query: 'informatika',
       gradientFrom: '#277FFD',
       gradientTo: '#71ACFF',
     },
     {
       name: 'Manajemen',
       icon: '/manajemen.svg',
+      query: 'manajemen',
       gradientFrom: '#DA5697',
       gradientTo: '#E17DAE',
     },
     {
       name: 'Ilmu Kedokteran',
       icon: '/kedokteran.svg',
+      query: 'kedokteran',
       gradientFrom: '#6C727F',
       gradientTo: '#9A9EA6',
     },
     {
       name: 'Arsitektur',
       icon: '/arsitektur.svg',
+      query: 'arsitektur',
       gradientFrom: '#6369E9',
       gradientTo: '#9397EF',
     },
     {
       name: 'Ilmu Ekonomi',
       icon: '/ekonomi.svg',
+      query: 'ekonomi',
       gradientFrom: '#8362EE',
       gradientTo: '#A289F1',
     },
     {
       name: 'Teknik Industri',
       icon: '/industri.svg',
+      query: 'industri',
       gradientFrom: '#55B585',
       gradientTo: '#A4C1B3',
     },
     {
       name: 'Psikologi',
       icon: '/psikologi.svg',
+      query: 'psikologi',
       gradientFrom: '#DD524C',
       gradientTo: '#E28E8A',
     },
     {
       name: 'Teknik Elektro',
       icon: '/elektro.svg',
+      query: 'elektro',
       gradientFrom: '#E9A13B',
       gradientTo: '#F4C47F',
     },
@@ -66,7 +74,7 @@ export default function HomePageTalentMajors() {
       <div className="grid grid-cols-2 gap-2 mt-4 group">
         {
           MAJORS.map((major) => (
-            <Link href="/" key={major.name}>
+            <Link href={{ pathname: '/search', query: { majors: major.query } }} key={major.name}>
               <a
                 className="transition-all ease-in-out duration-150 transform filter hover:scale-105 group-hover:opacity-50 py-2 px-2 md:px-4 flex items-center major hover:shadow-xl border-2 border-white text-center rounded-lg font-bold text-sm text-white"
                 style={{ background: `linear-gradient(90deg, ${major.gradientFrom} 40.94%, ${major.gradientTo} 90.31%)` }}
