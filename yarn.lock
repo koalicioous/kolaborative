@@ -3036,14 +3036,14 @@
     "iconv-lite" "0.4.24"
     "unpipe" "1.0.0"
 
-"react-dnd-html5-backend@^14.0.0":
+"react-dnd-html5-backend@^14.0.0", "react-dnd-html5-backend@^14.0.2":
   "integrity" "sha512-QgN6rYrOm4UUj6tIvN8ovImu6uP48xBXF2rzVsp6tvj6d5XQ7OjHI4SJ/ZgGobOneRAU3WCX4f8DGCYx0tuhlw=="
   "resolved" "https://registry.npmjs.org/react-dnd-html5-backend/-/react-dnd-html5-backend-14.0.2.tgz"
   "version" "14.0.2"
   dependencies:
     "dnd-core" "14.0.1"
 
-"react-dnd@^14.0.2":
+"react-dnd@^14.0.2", "react-dnd@^14.0.4":
   "integrity" "sha512-AFJJXzUIWp5WAhgvI85ESkDCawM0lhoVvfo/lrseLXwFdH3kEO3v8I2C81QPqBW2UEyJBIPStOhPMGYGFtq/bg=="
   "resolved" "https://registry.npmjs.org/react-dnd/-/react-dnd-14.0.4.tgz"
   "version" "14.0.4"
