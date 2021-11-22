@@ -36,9 +36,7 @@ const FILTER = [
 
 interface SearchFilterProps {
     openModal: Dispatch<SetStateAction<FilterProp>>,
-    query: {
-      [key: string]: string[] | string | undefined,
-    }
+    query: any
 }
 
 export default function SearchFilter({ openModal, query } : SearchFilterProps) {
