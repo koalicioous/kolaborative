@@ -89,7 +89,7 @@ export default function CreateTalentInput(
           <input
             id="major"
             type="text"
-            className={`px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full ${!validation.major ? 'border-gray-200' : 'border-red-500'}`}
+            className={`px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full ${!validation.major ? 'border-gray-200' : 'border-red-500'}`}
             placeholder="Pilih jurusan yang kamu butuhkan"
             value={newTalent.major}
             onChange={(e) => setNewTalent({ ...newTalent, major: e.target.value })}
@@ -128,7 +128,7 @@ export default function CreateTalentInput(
         <textarea
           id="jobDescription"
           rows={5}
-          className={`px-2 py-3 text-sm rounded-md border mt-1 w-full bg-white ${validation.description ? 'border-red-500' : 'border-gray-200'}`}
+          className={`px-2 py-3 text-base rounded-md border mt-1 w-full bg-white ${validation.description ? 'border-red-500' : 'border-gray-200'}`}
           placeholder="Jelaskan pekerjaan yang perlu dilakukan"
           value={newTalent.description}
           onChange={(e) => { setNewTalent({ ...newTalent, description: e.target.value }); }}
