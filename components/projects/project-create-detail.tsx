@@ -18,7 +18,7 @@ export default function ProjectCreateDetail() {
         <input
           id="name"
           type="text"
-          className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full"
+          className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full"
           placeholder="Ketik nama proyekmu"
           value={project.name}
           onChange={(e) => dispatch({
@@ -52,7 +52,7 @@ export default function ProjectCreateDetail() {
         <input
           id="event"
           type="text"
-          className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full"
+          className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full"
           placeholder="Event yang diikuti proyek ini"
           value={project.event}
           onChange={(e) => dispatch({
@@ -64,7 +64,7 @@ export default function ProjectCreateDetail() {
       </label>
       <label htmlFor="deadline" className="block mt-3">
         <div>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-base date-input font-medium text-gray-700">
             Batas akhir pendaftaran
           </span>
           <span className="text-red-500">*</span>
@@ -72,7 +72,7 @@ export default function ProjectCreateDetail() {
         <input
           id="deadline"
           type="date"
-          className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
+          className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full bg-white"
           placeholder="Event yang diikuti proyek ini"
           value={project.registrationDeadline}
           onChange={(e) => dispatch({
@@ -92,7 +92,7 @@ export default function ProjectCreateDetail() {
         <textarea
           id="description"
           rows={10}
-          className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
+          className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full bg-white"
           placeholder="Event yang diikuti proyek ini"
           value={project.description}
           onChange={(e) => dispatch({
@@ -120,7 +120,7 @@ export default function ProjectCreateDetail() {
                   name={`goal-${index}`}
                   id={`goal-${index}`}
                   value={goal.description}
-                  className="py-3 focus:outline-none rounded-r-md flex-grow"
+                  className="py-3 focus:outline-none rounded-r-md flex-grow text-base"
                   placeholder="ex: Memenangkan medali emas PIMNAS 2021"
                   onChange={(e) => dispatch({
                     type: NewProjectDetailActionType.EDIT_GOAL_DESCRIPTION,
@@ -169,7 +169,7 @@ export default function ProjectCreateDetail() {
           <input
             id="startDate"
             type="date"
-            className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
+            className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full bg-white"
             placeholder="Event yang diikuti proyek ini"
             value={project.startDate}
             onChange={(e) => dispatch({
@@ -189,7 +189,7 @@ export default function ProjectCreateDetail() {
           <input
             id="finishDate"
             type="date"
-            className="px-2 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
+            className="px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full bg-white"
             placeholder="Event yang diikuti proyek ini"
             value={project.finishDate}
             onChange={(e) => dispatch({

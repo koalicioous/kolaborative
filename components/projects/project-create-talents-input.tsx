@@ -81,7 +81,7 @@ export default function CreateTalentInput(
       <div className="grid grid-cols-4 gap-3">
         <label htmlFor="major" className="block col-span-3">
           <div>
-            <span className="text-sm font-medium text-gray-700">
+            <span className="text-vase font-medium text-gray-700">
               Jurusan
             </span>
             <span className="text-red-500">*</span>
@@ -104,7 +104,7 @@ export default function CreateTalentInput(
             </span>
             <span className="text-red-500">*</span>
           </div>
-          <select name="amount" id="amount" value={newTalent.amount} className="px-3 py-3 text-sm rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) })}>
+          <select name="amount" id="amount" value={newTalent.amount} className="px-3 py-3 text-base rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) })}>
             {
               [...Array(10)].map((item, index) => (
                 <option
@@ -120,7 +120,7 @@ export default function CreateTalentInput(
       </div>
       <label htmlFor="jobDescription" className="block mt-3">
         <div>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-base font-medium text-gray-700">
             Deskripsi Tugas
           </span>
           <span className="text-red-500">*</span>
@@ -139,7 +139,7 @@ export default function CreateTalentInput(
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="skills" className="block col-span-3 mt-3">
         <div>
-          <span className="text-sm font-medium text-gray-700">
+          <span className="text-base font-medium text-gray-700">
             Keahlian yang diharapkan
             <span className="ml-1 text-gray-400">(misal: Web Programming)</span>
           </span>

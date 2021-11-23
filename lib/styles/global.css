@@ -76,3 +76,10 @@
     background: #b7cfe0;
     cursor: pointer;
 }
+
+.date-input {
+    min-width: 100%;
+    -webkit-appearance: textfield;
+    -moz-appearance: textfield;
+    min-height: 1.2em; 
+}
