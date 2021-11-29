@@ -19,12 +19,6 @@ export default function ProjectCreateTalents() {
 
   return (
     <section className="max-w-lg mx-auto bg-white p-3">
-      <div className="p-3 rounded-md border border-yellow-200 bg-yellow-50 mb-3">
-        <h1 className="font-bold text-gray-700">Tim Kolaborasi</h1>
-        <p className="text-sm">
-          Masukkan setidaknya 1 talenta yang kamu perlukan dalam proyek keren ini.
-        </p>
-      </div>
       {
         project.talents.length > 0
           && project.talents.map((talent: Talent) => (

@@ -1,5 +1,5 @@
 import {
-  useState, Dispatch, SetStateAction,
+  useState, Dispatch, SetStateAction, useRef, useEffect,
 } from 'react';
 import { v4 as uuid4 } from 'uuid';
 import { WithContext as ReactTags } from 'react-tag-input';
@@ -41,6 +41,7 @@ export default function CreateTalentInput(
 
   const [edit] = useState<boolean|undefined>(isEditing);
   const { project, dispatch } = useStore();
+  const majorName = useRef<HTMLInputElement>(null);
 
   const handleAddSkill = (skill: {id: string, text: string}) => setNewTalent({
     ...newTalent,
@@ -76,6 +77,12 @@ export default function CreateTalentInput(
     });
   };
 
+  useEffect(() => {
+    if (majorName.current) {
+      majorName.current.focus();
+    }
+  }, []);
+
   return (
     <div className={`border-b flex flex-col  ${edit || project.talents.length > 0 ? 'p-3 border rounded-md border-gray-200' : 'border-gray-100'}`}>
       <div className="grid grid-cols-4 gap-3">
@@ -88,8 +95,9 @@ export default function CreateTalentInput(
           </div>
           <input
             id="major"
+            ref={majorName}
             type="text"
-            className={`px-2 py-3 text-base rounded-md border border-gray-200 mt-1 w-full ${!validation.major ? 'border-gray-200' : 'border-red-500'}`}
+            className={`px-2 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full ${!validation.major ? 'border-gray-200' : 'border-red-500'}`}
             placeholder="Pilih jurusan yang kamu butuhkan"
             value={newTalent.major}
             onChange={(e) => setNewTalent({ ...newTalent, major: e.target.value })}
@@ -104,7 +112,7 @@ export default function CreateTalentInput(
             </span>
             <span className="text-red-500">*</span>
           </div>
-          <select name="amount" id="amount" value={newTalent.amount} className="px-3 py-3 text-base rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) })}>
+          <select name="amount" id="amount" value={newTalent.amount} className="px-3 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full" onChange={(e) => setNewTalent({ ...newTalent, amount: parseInt(e.target.value, 10) })}>
             {
               [...Array(10)].map((item, index) => (
                 <option
@@ -120,7 +128,7 @@ export default function CreateTalentInput(
       </div>
       <label htmlFor="jobDescription" className="block mt-3">
         <div>
-          <span className="text-base font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700">
             Deskripsi Tugas
           </span>
           <span className="text-red-500">*</span>
@@ -128,7 +136,7 @@ export default function CreateTalentInput(
         <textarea
           id="jobDescription"
           rows={5}
-          className={`px-2 py-3 text-base rounded-md border mt-1 w-full bg-white ${validation.description ? 'border-red-500' : 'border-gray-200'}`}
+          className={`px-2 py-2 text-sm rounded-md border mt-1 w-full bg-white ${validation.description ? 'border-red-500' : 'border-gray-200'}`}
           placeholder="Jelaskan pekerjaan yang perlu dilakukan"
           value={newTalent.description}
           onChange={(e) => { setNewTalent({ ...newTalent, description: e.target.value }); }}
@@ -139,7 +147,7 @@ export default function CreateTalentInput(
       {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
       <label htmlFor="skills" className="block col-span-3 mt-3">
         <div>
-          <span className="text-base font-medium text-gray-700">
+          <span className="text-sm font-medium text-gray-700">
             Keahlian yang diharapkan
             <span className="ml-1 text-gray-400">(misal: Web Programming)</span>
           </span>
@@ -197,7 +205,7 @@ export default function CreateTalentInput(
         && (
           <button
             type="button"
-            className="-mx-3 -mb-3 mt-3 py-3 border-t border-gray-200 text-sm text-gray-500 font-medium bg-gray-100 hover:bg-gray-200 transition-all"
+            className="-mx-3 -mb-3 mt-3 py-2 border-t border-gray-200 text-sm text-gray-500 font-medium bg-gray-100 hover:bg-gray-200 transition-all"
             onClick={() => {
               if (edit) return editTalent('');
               return cancelEdit(false);

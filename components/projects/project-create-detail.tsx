@@ -74,7 +74,7 @@ export default function ProjectCreateDetail() {
           type="date"
           className="px-2 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
           placeholder="Event yang diikuti proyek ini"
-          value={project.registrationDeadline}
+          value={project.registrationDeadlin || new Date()}
           onChange={(e) => dispatch({
             type: NewProjectDetailActionType.UPDATE_FIELD,
             field: 'registrationDeadline',
@@ -158,7 +158,7 @@ export default function ProjectCreateDetail() {
       >
         + Tambah tujuan proyek
       </button>
-      <div className="grid grid-cols-2 gap-4 mt-3">
+      <div className="grid grid-cols-1 gap-4 mt-3">
         <label htmlFor="startDate" className="block">
           <div>
             <span className="text-sm font-medium text-gray-700">
