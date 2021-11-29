@@ -30,15 +30,15 @@ export default function CreateProjectTab({ step }: CreateProjectTabProps) {
     : (isDetailCompleted ? completedClass : inactiveClass);
 
   return (
-    <section className="max-w-lg mx-auto bg-white flex px-3 py-4 overflow-x-auto">
+    <section className="max-w-lg mx-auto bg-white flex px-3 py-3 overflow-x-auto">
       <Link href={{ pathname: '/create-project', query: { step: STEP_DETAIL } }}>
-        <a type="button" className={`transition-all p-1 mr-3 w-full shadow flex flex-grow items-center justify-center rounded-full text-center font-bold text-sm px-3 whitespace-nowrap ${detailClass}`}>
+        <a type="button" className={`transition-all p-1 mr-3 w-full shadow flex flex-grow items-center justify-center rounded-full text-center font-bold text-xs px-3 whitespace-nowrap ${detailClass}`}>
           <InfoCircleSolid className="mt-1 h-5 flex justify-center items-center w-6" />
           Informasi Proyek
         </a>
       </Link>
       <Link href={{ pathname: '/create-project', query: { step: STEP_TALENT } }}>
-        <a type="button" className={`transition-all p-1 w-full shadow flex flex-grow items-center justify-center rounded-full text-center font-bold text-sm px-3 whitespace-nowrap ${talentClass}`}>
+        <a type="button" className={`transition-all p-1 w-full shadow flex flex-grow items-center justify-center rounded-full text-center font-bold text-xs px-3 whitespace-nowrap ${talentClass}`}>
           <UsersSolid className="pt-3 h-10 flex justify-center items-center w-6 -my-1" />
           Kebutuhan Talenta
         </a>
