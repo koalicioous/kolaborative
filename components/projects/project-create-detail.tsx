@@ -73,8 +73,8 @@ export default function ProjectCreateDetail() {
           id="deadline"
           type="date"
           className="px-2 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
-          placeholder="Event yang diikuti proyek ini"
-          value={project.registrationDeadlin || new Date()}
+          placeholder="Tenggat pendaftaran"
+          value={project.registrationDeadline || new Date().toLocaleDateString()}
           onChange={(e) => dispatch({
             type: NewProjectDetailActionType.UPDATE_FIELD,
             field: 'registrationDeadline',
@@ -121,7 +121,7 @@ export default function ProjectCreateDetail() {
                   id={`goal-${index}`}
                   value={goal.description}
                   className="py-2 focus:outline-none rounded-r-md flex-grow text-sm"
-                  placeholder="ex: Memenangkan medali emas PIMNAS 2021"
+                  placeholder="Menjuarai PIMNAS 2021"
                   onChange={(e) => dispatch({
                     type: NewProjectDetailActionType.EDIT_GOAL_DESCRIPTION,
                     field: goal.id,
