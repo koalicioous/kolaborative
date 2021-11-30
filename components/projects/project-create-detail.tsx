@@ -53,8 +53,7 @@ export default function ProjectCreateDetail() {
           id="deadline"
           type="date"
           className="px-2 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full bg-white"
-          placeholder="Tenggat pendaftaran"
-          value={project.registrationDeadline || new Date().toLocaleDateString()}
+          value={project.registrationDeadline || `${new Date().getFullYear()}-${new Date().getMonth()}-${new Date().getDate()}`}
           onChange={(e) => dispatch({
             type: NewProjectDetailActionType.UPDATE_FIELD,
             field: 'registrationDeadline',
