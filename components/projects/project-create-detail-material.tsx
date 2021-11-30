@@ -133,7 +133,7 @@ export default function ProjectCreateDetailMaterial() {
           <DesktopDatePicker
             label="Tanggal Mulai Proyek"
             inputFormat="dd/MM/yyyy"
-            value={project.registrationDeadline || null}
+            value={project.startDate || null}
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'startDate',
@@ -147,7 +147,7 @@ export default function ProjectCreateDetailMaterial() {
           <DesktopDatePicker
             label="Tanggal Selesai Proyek"
             inputFormat="dd/MM/yyyy"
-            value={project.registrationDeadline || null}
+            value={project.finishDate || null}
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'finishDate',
