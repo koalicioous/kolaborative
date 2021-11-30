@@ -22,9 +22,9 @@ export default function ProjectCreateDetailMaterial() {
 
   return (
     <section className="max-w-lg mx-auto bg-white p-3">
-      <Stack spacing={2}>
+      <Stack spacing={2} className="mb-3">
         <TextField
-          id="project-title"
+          id="name"
           fullWidth
           label="Nama Proyek"
           required
@@ -40,6 +40,19 @@ export default function ProjectCreateDetailMaterial() {
         <FormControlLabel
           control={<Checkbox size="small" />}
           label={<div className="text-xs">Hanya tampilkan kepada pengguna di institusi saya.</div>}
+        />
+        <TextField
+          id="event"
+          fullWidth
+          label="Event yang diikuti proyek ini"
+          variant="outlined"
+          size="small"
+          value={project.event}
+          onChange={(e) => dispatch({
+            type: NewProjectDetailActionType.UPDATE_FIELD,
+            field: 'event',
+            payload: e.target.value,
+          })}
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DesktopDatePicker
@@ -115,6 +128,35 @@ export default function ProjectCreateDetailMaterial() {
         >
           Tambah Goals Proyek
         </Button>
+        <Divider />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Tanggal Mulai Proyek"
+            inputFormat="dd/MM/yyyy"
+            value={project.registrationDeadline || null}
+            onChange={(value) => dispatch({
+              type: NewProjectDetailActionType.UPDATE_FIELD,
+              field: 'startDate',
+              payload: value,
+            })}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            renderInput={(params) => <TextField fullWidth {...params} size="small" />}
+          />
+        </LocalizationProvider>
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Tanggal Selesai Proyek"
+            inputFormat="dd/MM/yyyy"
+            value={project.registrationDeadline || null}
+            onChange={(value) => dispatch({
+              type: NewProjectDetailActionType.UPDATE_FIELD,
+              field: 'finishDate',
+              payload: value,
+            })}
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            renderInput={(params) => <TextField fullWidth {...params} size="small" />}
+          />
+        </LocalizationProvider>
       </Stack>
     </section>
   );
