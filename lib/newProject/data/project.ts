@@ -32,11 +32,11 @@ export interface NewProject {
 }
 
 export const InitialState: NewProject = {
-  name: '',
+  name: 'asdf',
   isPrivate: true,
   event: '',
   registrationDeadline: '',
-  description: '',
+  description: 'asdf',
   goals: [],
   startDate: '',
   finishDate: '',

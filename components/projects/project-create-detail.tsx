@@ -8,26 +8,6 @@ export default function ProjectCreateDetail() {
 
   return (
     <section className="max-w-lg mx-auto bg-white p-3">
-      <label htmlFor="name" className="block">
-        <div>
-          <span className="text-sm font-medium text-gray-700">
-            Nama Proyek
-          </span>
-          <span className="text-red-500">*</span>
-        </div>
-        <input
-          id="name"
-          type="text"
-          className="px-2 py-2 text-sm rounded-md border border-gray-200 mt-1 w-full"
-          placeholder="Ketik nama proyekmu"
-          value={project.name}
-          onChange={(e) => dispatch({
-            type: NewProjectDetailActionType.UPDATE_FIELD,
-            field: 'name',
-            payload: e.target.value,
-          })}
-        />
-      </label>
       <label htmlFor="private" className="flex items-center mt-2">
         <input
           id="private"
