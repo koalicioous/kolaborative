@@ -8,7 +8,7 @@ import IconButton from '@mui/material/IconButton';
 import DeleteIcon from '@mui/icons-material/Delete';
 import InputAdornment from '@mui/material/InputAdornment';
 import Typography from '@mui/material/Typography';
-import DesktopDatePicker from '@mui/lab/DesktopDatePicker';
+import DatePicker from '@mui/lab/DatePicker';
 import Divider from '@mui/material/Divider';
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import Button from '@mui/material/Button';
@@ -55,17 +55,18 @@ export default function ProjectCreateDetailMaterial() {
           })}
         />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
-            label="Batas Pendaftaran"
-            inputFormat="dd/MM/yyyy"
-            value={project.registrationDeadline || new Date().toLocaleDateString()}
+          <DatePicker
+            label="Deadline Pendaftaran"
+            // inputFormat="dd/MM/yyyy"
+            views={['day', 'month', 'year']}
+            value={project.registrationDeadline || null}
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'registrationDeadline',
               payload: value,
             })}
             // eslint-disable-next-line react/jsx-props-no-spreading
-            renderInput={(params) => <TextField fullWidth {...params} required size="small" />}
+            renderInput={(params) => <TextField fullWidth {...params} required size="small" helperText={null} />}
           />
         </LocalizationProvider>
         <TextField
@@ -130,7 +131,7 @@ export default function ProjectCreateDetailMaterial() {
         </Button>
         <Divider />
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
+          <DatePicker
             label="Tanggal Mulai Proyek"
             inputFormat="dd/MM/yyyy"
             value={project.startDate || null}
@@ -144,7 +145,7 @@ export default function ProjectCreateDetailMaterial() {
           />
         </LocalizationProvider>
         <LocalizationProvider dateAdapter={AdapterDateFns}>
-          <DesktopDatePicker
+          <DatePicker
             label="Tanggal Selesai Proyek"
             inputFormat="dd/MM/yyyy"
             value={project.finishDate || null}

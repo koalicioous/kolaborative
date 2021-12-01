@@ -16,7 +16,7 @@ export type Talent = {
   major: string,
   amount: number,
   description: string,
-  skills: {id: string, text:string}[]
+  skills: string[]
 }
 
 export interface NewProject {

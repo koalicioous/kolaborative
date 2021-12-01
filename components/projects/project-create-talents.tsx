@@ -1,7 +1,8 @@
 import { useState, useEffect } from 'react';
 import { Talent } from '../../lib/newProject/data/project';
 import { useStore } from '../../lib/newProject/stores/createProject';
-import CreateTalentInput from './project-create-talents-input';
+// import CreateTalentInput from './project-create-talents-input';
+import CreateTalentInputMaterial from './project-create-talents-input-material';
 import TalentItem from './project-create-talents-item';
 
 export default function ProjectCreateTalents() {
@@ -25,8 +26,16 @@ export default function ProjectCreateTalents() {
             <div className="mt-2" key={talent.id}>
               {
                 idEdited === talent.id
+                  // ? (
+                  //   <CreateTalentInput
+                  //     talent={talent}
+                  //     editTalent={setIdEdited}
+                  //     cancelEdit={setIsCreating}
+                  //     isEditing
+                  //   />
+                  // )
                   ? (
-                    <CreateTalentInput
+                    <CreateTalentInputMaterial
                       talent={talent}
                       editTalent={setIdEdited}
                       cancelEdit={setIsCreating}
@@ -40,7 +49,7 @@ export default function ProjectCreateTalents() {
       }
       {
         (project.talents.length < 1 || isCreating)
-        && <div className="mt-3"><CreateTalentInput isEditing={false} editTalent={setIdEdited} cancelEdit={setIsCreating} /></div>
+        && <div className="mt-3"><CreateTalentInputMaterial isEditing={false} editTalent={setIdEdited} cancelEdit={setIsCreating} /></div>
       }
       <div className="border-b border-gray-200 mt-4" />
       <button type="button" disabled={project.talents.length < 1 || isCreating || idEdited !== ''} className={`p-3 rounded-md w-full mt-4 text-sm ${pushButtonClass}`} onClick={() => setIsCreating(true)}>

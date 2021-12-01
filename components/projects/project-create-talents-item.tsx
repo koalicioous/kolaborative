@@ -37,8 +37,8 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
         <ul className="list-disc list-inside">
           {
             talent.skills.map((skill) => (
-              <li className="my-1" key={skill.id}>
-                {[skill.text]}
+              <li className="my-1" key={skill}>
+                {[skill]}
               </li>
             ))
           }
