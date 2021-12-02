@@ -3,7 +3,7 @@ import Head from 'next/head';
 import BasicLayout from '../../components/layout/base/basic-layout';
 import ProfileHeader from '../../components/profile/profile-header';
 import { useAuth } from '../../context/auth';
-import SignIn from '../../components/auth/signin';
+import Authentication from '../../components/auth';
 
 export default function MyProfile() {
   const { user } = useAuth();
@@ -17,7 +17,7 @@ export default function MyProfile() {
       {
         user
           ? <ProfileHeader />
-          : <SignIn />
+          : <Authentication />
       }
     </>
   );
