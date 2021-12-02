@@ -6,11 +6,12 @@ import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
 import { createTheme, ThemeProvider } from '@mui/material';
 import '../lib/styles/global.css';
+import { AuthProvider } from '../context/auth';
 
 const theme = createTheme({
   typography: {
     fontFamily: [
-      // 'Quicksand',
+      'Quicksand',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',
@@ -45,8 +46,10 @@ export default function MyApp({ Component, pageProps }: AppPropsWithLayout) {
   const getLayout = Component.getLayout ?? ((page) => page);
 
   return getLayout(
-    <ThemeProvider theme={theme}>
-      <Component {...pageProps} />
-    </ThemeProvider>,
+    <AuthProvider>
+      <ThemeProvider theme={theme}>
+        <Component {...pageProps} />
+      </ThemeProvider>
+    </AuthProvider>,
   );
 }
