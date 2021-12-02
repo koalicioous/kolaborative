@@ -1,15 +1,20 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
-import { Stack, TextField } from '@mui/material';
-import IconButton from '@mui/material/IconButton';
-import Visibility from '@mui/icons-material/Visibility';
-import VisibilityOff from '@mui/icons-material/VisibilityOff';
-import FormControl from '@mui/material/FormControl';
-import InputLabel from '@mui/material/InputLabel';
-import OutlinedInput from '@mui/material/OutlinedInput';
+import {
+  Stack,
+  TextField,
+  IconButton,
+  FormControl,
+  OutlinedInput,
+  InputAdornment,
+  FormHelperText,
+  InputLabel,
+} from '@mui/material';
+import {
+  Visibility,
+  VisibilityOff,
+} from '@mui/icons-material';
 import LoadingButton from '@mui/lab/LoadingButton';
-import InputAdornment from '@mui/material/InputAdornment';
-import FormHelperText from '@mui/material/FormHelperText';
 import { useAuth } from '../../context/auth';
 
 interface NewUserData {
