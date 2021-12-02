@@ -30,6 +30,6 @@ export const menus: Menu[] = [
   {
     name: 'Profile',
     icon: <UserIconOutline className="h-5 w-5" />,
-    href: '/myprofile',
+    href: ['/myprofile', '/login', '/register'],
   },
 ];

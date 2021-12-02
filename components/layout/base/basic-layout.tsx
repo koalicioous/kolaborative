@@ -6,7 +6,7 @@ import BottomNavbar from '../navbar/bottom-navbar';
 const BasicLayout: FC = ({ children }) => (
   <div className="flex flex-col min-h-screen">
     <MainHeader />
-    <main className="flex-1 py-14 bg-gray-100">
+    <main className="flex-1 flex py-14 bg-gray-100 flex-grow justify-center">
       {children}
     </main>
     <BottomNavbar />
