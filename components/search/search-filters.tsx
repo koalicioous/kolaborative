@@ -4,7 +4,6 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {
-  InitialSkills,
   InitialEvents,
   FilterProp,
   FilterModalMode,
@@ -26,6 +25,7 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
   const [majors, setMajors] = useState<Major[]>([]);
+  const [skills, setSkills] = useState<Skill[]>([]);
 
   const FILTER = [
     {
@@ -37,7 +37,7 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
     {
       id: FilterModalMode.Keahlian,
       name: 'Keahlian',
-      items: InitialSkills,
+      items: skills,
       icon: faBrain,
     },
     {
@@ -57,7 +57,18 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
     };
 
     fetchMajors();
-  });
+  }, []);
+
+  useEffect(() => {
+    const fetchSkills = async () => {
+      const { data: skillsResponse } = await supabase
+        .from<Skill>('skills')
+        .select('*');
+      setSkills(skillsResponse ?? []);
+    };
+
+    fetchSkills();
+  }, []);
 
   const determineActionType = (parameter: string) => {
     switch (parameter) {
