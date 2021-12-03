@@ -1,10 +1,9 @@
 import {
-  SetStateAction, Dispatch, useEffect,
+  SetStateAction, Dispatch, useEffect, useState,
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {
-  InitialMajors,
   InitialSkills,
   InitialEvents,
   FilterProp,
@@ -15,27 +14,7 @@ import {
 } from '../../lib/filterProject/data/filters';
 import { useFilterStore } from '../../lib/filterProject/store/filters';
 import { SetFilterActionType } from '../../lib/filterProject/action/setFilterAction';
-
-const FILTER = [
-  {
-    id: FilterModalMode.Jurusan,
-    name: 'Jurusan',
-    items: InitialMajors,
-    icon: faGraduationCap,
-  },
-  {
-    id: FilterModalMode.Keahlian,
-    name: 'Keahlian',
-    items: InitialSkills,
-    icon: faBrain,
-  },
-  {
-    id: FilterModalMode.Event,
-    name: 'Event',
-    items: InitialEvents,
-    icon: faCalendarAlt,
-  },
-];
+import supabase from '../../lib/supabase/client';
 
 interface SearchFilterProps {
     openModal: Dispatch<SetStateAction<FilterProp>>,
@@ -46,6 +25,39 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
   const { filters, dispatch } = useFilterStore();
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
+  const [majors, setMajors] = useState<Major[]>([]);
+
+  const FILTER = [
+    {
+      id: FilterModalMode.Jurusan,
+      name: 'Jurusan',
+      items: majors,
+      icon: faGraduationCap,
+    },
+    {
+      id: FilterModalMode.Keahlian,
+      name: 'Keahlian',
+      items: InitialSkills,
+      icon: faBrain,
+    },
+    {
+      id: FilterModalMode.Event,
+      name: 'Event',
+      items: InitialEvents,
+      icon: faCalendarAlt,
+    },
+  ];
+
+  useEffect(() => {
+    const fetchMajors = async () => {
+      const { data: majorsResponse } = await supabase
+        .from<Major>('majors')
+        .select('*');
+      setMajors(majorsResponse ?? []);
+    };
+
+    fetchMajors();
+  });
 
   const determineActionType = (parameter: string) => {
     switch (parameter) {
