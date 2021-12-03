@@ -1,6 +1,7 @@
 import {
   SetStateAction, Dispatch, useEffect,
 } from 'react';
+import useSWR from 'swr';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -13,23 +14,26 @@ import {
 } from '../../lib/filterProject/data/filters';
 import { useFilterStore } from '../../lib/filterProject/store/filters';
 import { SetFilterActionType } from '../../lib/filterProject/action/setFilterAction';
+import supabase from '../../lib/supabase/client';
 
 interface SearchFilterProps {
     openModal: Dispatch<SetStateAction<FilterProp>>,
-    majors: Major[],
-    skills: Skill[],
     query: any
 }
 
+const filterFetcher = async (field: string) => {
+  const { data } = await supabase.from<Major|Skill>(field).select('*');
+  return data;
+};
+
 export default function SearchFilter({
-  openModal, query, majors, skills,
+  openModal, query,
 } : SearchFilterProps) {
   const { filters, dispatch } = useFilterStore();
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
-
-  // console.log(query);
-  // console.log('active filters: ', filters);
+  const { data: majors } = useSWR('majors', filterFetcher);
+  const { data: skills } = useSWR('skills', filterFetcher);
 
   const FILTER = [
     {
@@ -77,7 +81,7 @@ export default function SearchFilter({
                 return dispatch({
                   type: determineActionType(parameter),
                   payload: {
-                    [parameter]: [filterProperty.items.find(
+                    [parameter]: [filterProperty.items?.find(
                       (item) => item.name.toLowerCase() === String(query[parameter])
                         .toLocaleLowerCase(),
                     )].filter((item) => item !== undefined),
@@ -87,7 +91,7 @@ export default function SearchFilter({
                 return dispatch({
                   type: determineActionType(parameter),
                   payload: {
-                    [parameter]: filterProperty.items.filter((item: Major | Skill | Event) => {
+                    [parameter]: filterProperty.items?.filter((item: Major | Skill | Event) => {
                       if (query[parameter].find(
                         (target: string) => item.name.toLowerCase() === target.toLowerCase(),
                       )) return true;
@@ -114,7 +118,7 @@ export default function SearchFilter({
               key={filter.name}
               className={`transition-all mr-2 flex-grow border border-blue-600 hover:text-white hover:shadow-lg font-semibold rounded-lg py-2 flex items-center justify-start px-5 ${Object.keys(filters).includes(filter.id) && filters[filter.id].length > 0 ? activeClass : idleClass}`}
               onClick={() => openModal({
-                visible: true, data: filter.items, title: filter.name, mode: filter.id,
+                visible: true, data: filter.items ?? [], title: filter.name, mode: filter.id,
               })}
             >
               <div className="w-8">
