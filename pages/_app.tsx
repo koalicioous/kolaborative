@@ -4,9 +4,15 @@ import 'tailwindcss/tailwind.css';
 import type { ReactElement, ReactNode } from 'react';
 import type { NextPage } from 'next';
 import type { AppProps } from 'next/app';
+import Router from 'next/router';
+import NProgress from 'nprogress';
+import 'nprogress/nprogress.css';
 import { createTheme, ThemeProvider } from '@mui/material';
 import '../lib/styles/global.css';
 import { AuthProvider } from '../context/auth';
+
+NProgress.configure({ showSpinner: false });
+Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on('routeChangeComplete', () => NProgress.done()); Router.events.on('routeChangeError', () => NProgress.done());
 
 const theme = createTheme({
   typography: {

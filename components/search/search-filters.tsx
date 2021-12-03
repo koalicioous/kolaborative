@@ -1,5 +1,5 @@
 import {
-  SetStateAction, Dispatch, useEffect, useState,
+  SetStateAction, Dispatch, useEffect,
 } from 'react';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
@@ -13,19 +13,20 @@ import {
 } from '../../lib/filterProject/data/filters';
 import { useFilterStore } from '../../lib/filterProject/store/filters';
 import { SetFilterActionType } from '../../lib/filterProject/action/setFilterAction';
-import supabase from '../../lib/supabase/client';
 
 interface SearchFilterProps {
     openModal: Dispatch<SetStateAction<FilterProp>>,
+    majors: Major[],
+    skills: Skill[],
     query: any
 }
 
-export default function SearchFilter({ openModal, query } : SearchFilterProps) {
+export default function SearchFilter({
+  openModal, query, majors, skills,
+} : SearchFilterProps) {
   const { filters, dispatch } = useFilterStore();
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
-  const [majors, setMajors] = useState<Major[]>([]);
-  const [skills, setSkills] = useState<Skill[]>([]);
 
   const FILTER = [
     {
@@ -47,28 +48,6 @@ export default function SearchFilter({ openModal, query } : SearchFilterProps) {
       icon: faCalendarAlt,
     },
   ];
-
-  useEffect(() => {
-    const fetchMajors = async () => {
-      const { data: majorsResponse } = await supabase
-        .from<Major>('majors')
-        .select('*');
-      setMajors(majorsResponse ?? []);
-    };
-
-    fetchMajors();
-  }, []);
-
-  useEffect(() => {
-    const fetchSkills = async () => {
-      const { data: skillsResponse } = await supabase
-        .from<Skill>('skills')
-        .select('*');
-      setSkills(skillsResponse ?? []);
-    };
-
-    fetchSkills();
-  }, []);
 
   const determineActionType = (parameter: string) => {
     switch (parameter) {
