@@ -8,7 +8,7 @@ export default function HomePageTalentMajors() {
     {
       name: 'Teknik Informatika',
       icon: '/informatika.svg',
-      query: 'informatika',
+      query: 'Teknik Informatika',
       gradientFrom: '#277FFD',
       gradientTo: '#71ACFF',
     },

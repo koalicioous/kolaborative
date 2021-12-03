@@ -28,6 +28,9 @@ export default function SearchFilter({
   const activeClass: string = 'bg-blue-600 text-white hover:bg-blue-700 font-semibold';
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
 
+  // console.log(query);
+  // console.log('active filters: ', filters);
+
   const FILTER = [
     {
       id: FilterModalMode.Jurusan,
@@ -75,7 +78,8 @@ export default function SearchFilter({
                   type: determineActionType(parameter),
                   payload: {
                     [parameter]: [filterProperty.items.find(
-                      (item) => item.name.toLowerCase() === String(query[parameter]),
+                      (item) => item.name.toLowerCase() === String(query[parameter])
+                        .toLocaleLowerCase(),
                     )].filter((item) => item !== undefined),
                   },
                 });
