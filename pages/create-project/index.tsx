@@ -2,7 +2,6 @@ import { ReactElement } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import CreateProjectLayout from '../../components/layout/base/create-project-layout';
-// import ProjectCreateDetail from '../../components/projects/project-create-detail';
 import ProjectCreateDetailMaterial from '../../components/projects/project-create-detail-material';
 import { STEP_DETAIL } from '../../constants/global';
 import CreateProjectTab from '../../components/tabs/create-project-tab';

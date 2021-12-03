@@ -18,6 +18,7 @@ export default function Home() {
         <title>
           Kolaborative - Temukan Proyek Seru untuk Asah Keahlianmu
         </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
 
       {/* <HomePageTab mode={mode} /> */}
