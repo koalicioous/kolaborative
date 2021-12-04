@@ -22,7 +22,7 @@ export default function HomePageTalentMajors() {
     {
       name: 'Ilmu Kedokteran',
       icon: '/kedokteran.svg',
-      query: 'kedokteran',
+      query: 'pendidikan dokter',
       gradientFrom: '#6C727F',
       gradientTo: '#9A9EA6',
     },
@@ -36,14 +36,14 @@ export default function HomePageTalentMajors() {
     {
       name: 'Ilmu Ekonomi',
       icon: '/ekonomi.svg',
-      query: 'ekonomi',
+      query: 'ilmu ekonomi',
       gradientFrom: '#8362EE',
       gradientTo: '#A289F1',
     },
     {
       name: 'Teknik Industri',
       icon: '/industri.svg',
-      query: 'industri',
+      query: 'teknik industri',
       gradientFrom: '#55B585',
       gradientTo: '#A4C1B3',
     },
@@ -57,7 +57,7 @@ export default function HomePageTalentMajors() {
     {
       name: 'Teknik Elektro',
       icon: '/elektro.svg',
-      query: 'elektro',
+      query: 'teknik elektro',
       gradientFrom: '#E9A13B',
       gradientTo: '#F4C47F',
     },
@@ -93,8 +93,8 @@ export default function HomePageTalentMajors() {
         }
       </div>
       <div className="mt-4 text-center">
-        <Link href="/">
-          <a className="text-blue-700 text-sm flex items-center justify-center">
+        <Link href="/majors">
+          <a className="text-blue-700 hover:bg-blue-50 rounded-md py-2 text-sm flex items-center justify-center">
             <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
             <span>
               Lihat semua jurusan (131)
