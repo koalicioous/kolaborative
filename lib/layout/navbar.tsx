@@ -15,7 +15,7 @@ export const menus: Menu[] = [
   {
     name: 'Home',
     icon: <HomeIconOutline className="h-5 w-5" />,
-    href: ['/', `/?mode=${MODE_TALENT}`, `/?mode=${MODE_OWNER}`],
+    href: ['/', `/?mode=${MODE_TALENT}`, `/?mode=${MODE_OWNER}`, '/#'],
   },
   {
     name: 'Saved',

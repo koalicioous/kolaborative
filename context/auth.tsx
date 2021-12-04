@@ -25,6 +25,12 @@ export function AuthProvider({ children }: {children: ReactElement | ReactElemen
       async (event, authChangeSession) => {
         setUser(authChangeSession?.user ?? null);
         setLoading(false);
+        fetch('/api/auth', {
+          method: 'POST',
+          headers: new Headers({ 'Content-Type': 'application/json' }),
+          credentials: 'same-origin',
+          body: JSON.stringify({ event, session }),
+        }).then((res) => res.json());
       },
     );
 

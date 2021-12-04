@@ -6,6 +6,19 @@ import ProjectCreateDetailMaterial from '../../components/projects/project-creat
 import { STEP_DETAIL } from '../../constants/global';
 import CreateProjectTab from '../../components/tabs/create-project-tab';
 import ProjectCreateTalents from '../../components/projects/project-create-talents';
+import supabase from '../../lib/supabase/client';
+
+export async function getServerSideProps({ req }: any) {
+  const { user } = await supabase.auth.api.getUserByCookie(req);
+
+  if (!user) {
+    // If no user, redirect to index.
+    return { props: {}, redirect: { destination: '/myprofile', permanent: false } };
+  }
+
+  // If there is a user, return it.
+  return { props: {} };
+}
 
 export default function CreateProject() {
   const { query } = useRouter();
