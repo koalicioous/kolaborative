@@ -35,22 +35,4 @@ export enum FilterModalMode {
   'Event' = 'events',
 }
 
-export const InitialMajors: Major[] = [
-  { id: 'informatika', name: 'informatika' },
-  { id: 'teknik industri', name: 'teknik industri' },
-  { id: 'teknik kimia', name: 'teknik kimia' },
-];
-
-export const InitialSkills: Skill[] = [
-  { id: '1', name: 'JavaScript' },
-  { id: '2', name: 'Web Programming' },
-  { id: '3', name: 'Graphic Design' },
-];
-
-export const InitialEvents: Event[] = [
-  { id: '1', name: 'Pekan Kreativitas Mahasiswa' },
-  { id: '2', name: 'Business Case Competition' },
-  { id: '3', name: 'Gemastik' },
-];
-
 export const InitialFilters: Filters = {};

@@ -5,7 +5,6 @@ import useSWR from 'swr';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBrain, faGraduationCap, faCalendarAlt } from '@fortawesome/free-solid-svg-icons';
 import {
-  InitialEvents,
   FilterProp,
   FilterModalMode,
   Major,
@@ -34,6 +33,7 @@ export default function SearchFilter({
   const idleClass: string = 'bg-white hover:bg-blue-600 text-blue-600';
   const { data: majors } = useSWR('majors', filterFetcher);
   const { data: skills } = useSWR('skills', filterFetcher);
+  const { data: events } = useSWR('events', filterFetcher);
 
   const FILTER = [
     {
@@ -51,7 +51,7 @@ export default function SearchFilter({
     {
       id: FilterModalMode.Event,
       name: 'Event',
-      items: InitialEvents,
+      items: events,
       icon: faCalendarAlt,
     },
   ];

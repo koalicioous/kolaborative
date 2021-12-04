@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useState } from 'react';
 import { SWRConfig } from 'swr';
 import {
-  FilterModalMode, FilterProp, Major, Skill,
+  FilterModalMode, FilterProp, Major, Skill, Event,
 } from '../../lib/filterProject/data/filters';
 import SearchHeader from '../../components/layout/header/search-header';
 import SearchTopProjects from '../../components/search/search-top-projects';
@@ -13,7 +13,7 @@ import { FiltersContextProvider } from '../../lib/filterProject/store/filters';
 import supabase from '../../lib/supabase/client';
 
 interface SearchProps {
-  fallback: Major[] | Skill[],
+  fallback: Major[] | Skill[] | Event[]
 }
 
 export default function Search({ fallback }: SearchProps) {
@@ -63,11 +63,13 @@ export default function Search({ fallback }: SearchProps) {
 export async function getStaticProps() {
   const { data: majors } = await supabase.from('majors').select('*');
   const { data: skills } = await supabase.from('skills').select('*');
+  const { data: events } = await supabase.from('events').select('*');
   return {
     props: {
       fallback: {
         majors,
         skills,
+        events,
       },
     },
   };

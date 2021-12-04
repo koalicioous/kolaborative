@@ -18,11 +18,9 @@ export default function HomePageTalentSkills() {
       <ul className="mt-4 flex flex-wrap">
         {
           SKILLS.map((skill) => (
-            <>
-              <Link href={{ pathname: '/search', query: { skills: skill } }}>
-                <a className="transition-all text-xs hover:shadow-lg border-blue-50 border hover:border-blue-300 sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium" key={skill}>{ skill }</a>
-              </Link>
-            </>
+            <Link href={{ pathname: '/search', query: { skills: skill } }} key={skill}>
+              <a className="transition-all text-xs hover:shadow-lg border-blue-50 border hover:border-blue-300 sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium" key={skill}>{ skill }</a>
+            </Link>
           ))
         }
       </ul>

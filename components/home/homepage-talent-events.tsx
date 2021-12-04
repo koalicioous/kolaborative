@@ -4,10 +4,22 @@ import EllipsisIconSolid from '../ui/icons/solid/ellipsis';
 
 export default function HomePageTalentEvents() {
   const EVENTS = [
-    'Pekan Kreativitas Mahasiswa',
-    'Gemastik 2021',
-    'Kompetisi Bisnis Mahasiswa Indonesia',
-    'Konferensi Ilmiah',
+    {
+      name: 'Pekan Kreativitas Mahasiswa',
+      image: './pkm-bg.jpeg',
+    },
+    {
+      name: 'Gemastik 2021',
+      image: '/gemastik-bg.jpeg',
+    },
+    {
+      name: 'Kompetisi Bisnis Mahasiswa Nasional',
+      image: '/kbmn-bg.jpeg',
+    },
+    {
+      name: 'Konferensi Ilmiah',
+      image: '/konferensi-bg.jpeg',
+    },
   ];
 
   return (
@@ -18,20 +30,30 @@ export default function HomePageTalentEvents() {
           Event Seru untuk Diikuti!
         </h2>
       </div>
-      <div className="grid grid-cols-2 gap-2 mt-3">
+      <div className="grid grid-cols-2 gap-2 mt-3 group">
         {
             EVENTS.map((event) => (
-              <div key={event} className="border border-blue-200 rounded-lg p-3 pb-16 text-white font-semibold" style={{ background: 'url(https://unsplash.com/random), linear-gradient(45deg, #3365E3 0%, #6B8EE7 100%)' }}>
-                {event}
-              </div>
+              <Link key={event.name} href={{ pathname: '/search', query: { events: event.name } }}>
+                <a
+                  className="transition-all border transform filter group-hover:opacity-50 major hover:scale-105 hover:shadow-lg rounded-lg p-3 pb-12 text-white font-semibold"
+                  style={{
+                    background: `linear-gradient(45deg, #0f3493eb 0%, #164ddbd1 100%), url(${event.image})`,
+                    backgroundSize: 'cover',
+                  }}
+                >
+                  {event.name}
+                </a>
+              </Link>
             ))
         }
       </div>
       <div className="mt-4 text-center">
-        <Link href="/">
-          <a className="flex items-center justify-center text-blue-700 text-sm">
+        <Link href="/events">
+          <a className="text-blue-700 hover:bg-blue-50 rounded-md py-2 text-sm flex items-center justify-center">
             <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
-            Lihat semua Event
+            <span>
+              Lihat semua event (25)
+            </span>
           </a>
         </Link>
       </div>
