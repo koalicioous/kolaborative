@@ -9,7 +9,7 @@ interface EventsProps {
   fallback: Event[]
 }
 
-export default function Majors({ fallback }: EventsProps) {
+export default function Events({ fallback }: EventsProps) {
   return (
     <main className="w-screen min-h-80">
       <SWRConfig value={{ fallback }}>
@@ -19,7 +19,7 @@ export default function Majors({ fallback }: EventsProps) {
   );
 }
 
-Majors.getLayout = function getLayout(page: ReactElement) {
+Events.getLayout = function getLayout(page: ReactElement) {
   return (
     <BasicLayout>
       {page}
@@ -28,11 +28,11 @@ Majors.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticProps() {
-  const { data: majors } = await supabase.from('events').select('*');
+  const { data: events } = await supabase.from('events').select('*');
   return {
     props: {
       fallback: {
-        majors,
+        events,
       },
     },
   };
