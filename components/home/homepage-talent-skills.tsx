@@ -18,16 +18,20 @@ export default function HomePageTalentSkills() {
       <ul className="mt-4 flex flex-wrap">
         {
           SKILLS.map((skill) => (
-            <li className="text-xs sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium" key={skill}>{ skill }</li>
+            <>
+              <Link href={{ pathname: '/search', query: { skills: skill } }}>
+                <a className="transition-all text-xs hover:shadow-lg border-blue-50 border hover:border-blue-300 sm:text-md bg-blue-100 text-blue-500 mr-2 mb-2 px-4 py-2 rounded-full font-medium" key={skill}>{ skill }</a>
+              </Link>
+            </>
           ))
         }
       </ul>
       <div className="mt-3 text-center">
-        <Link href="/">
-          <a className="flex items-center justify-center text-blue-700 text-sm">
+        <Link href="/skills">
+          <a className="text-blue-700 hover:bg-blue-50 rounded-md py-2 text-sm flex items-center justify-center">
             <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
             <span>
-              Lihat semua keahlian
+              Lihat semua skill (99+)
             </span>
           </a>
         </Link>

@@ -16,6 +16,7 @@ export default function MajorList() {
 
   return (
     <section className="max-w-lg mx-auto bg-white p-3 h-full">
+      <h1 className="mb-3 text-sm md:text-lg font-medium text-blue-600">Proyek Berdasarkan Jurusan yang Dibutuhkan</h1>
       <TextField
         label="Cari jurusan"
         fullWidth
