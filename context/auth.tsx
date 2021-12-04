@@ -14,27 +14,30 @@ export function AuthProvider({ children }: {children: ReactElement | ReactElemen
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
-    const session = supabase.auth.session();
+    const currentSession = supabase.auth.session();
 
-    if (session?.user) {
-      setUser(session?.user);
+    if (currentSession?.user) {
+      setUser(currentSession?.user);
     }
     setLoading(false);
 
-    const { data: listener } = supabase.auth.onAuthStateChange(
-      async (event, authChangeSession) => {
-        setUser(authChangeSession?.user ?? null);
-        setLoading(false);
+    const { data: authListener } = supabase.auth.onAuthStateChange(
+      (event, session) => {
+        setUser(session?.user ?? null);
         fetch('/api/auth', {
           method: 'POST',
           headers: new Headers({ 'Content-Type': 'application/json' }),
           credentials: 'same-origin',
           body: JSON.stringify({ event, session }),
-        }).then((res) => res.json());
+        }).then((res) => {
+          res.json();
+          setLoading(false);
+        })
+          .catch(() => setLoading(false));
       },
     );
 
-    return () => listener?.unsubscribe();
+    return () => authListener?.unsubscribe();
   }, []);
 
   const value = {

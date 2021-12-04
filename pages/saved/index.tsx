@@ -13,7 +13,7 @@ export async function getServerSideProps({ req }: any) {
   }
 
   // If there is a user, return it.
-  return { props: {} };
+  return { props: { user } };
 }
 
 export default function Saved() {
