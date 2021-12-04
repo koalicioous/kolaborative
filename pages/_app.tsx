@@ -17,7 +17,7 @@ Router.events.on('routeChangeStart', () => NProgress.start()); Router.events.on(
 const theme = createTheme({
   typography: {
     fontFamily: [
-      'Quicksand',
+      // 'Quicksand',
       '-apple-system',
       'BlinkMacSystemFont',
       '"Segoe UI"',

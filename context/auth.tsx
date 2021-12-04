@@ -34,6 +34,9 @@ export function AuthProvider({ children }: {children: ReactElement | ReactElemen
   const value = {
     signUp: (data: any) => supabase.auth.signUp(data),
     signIn: (data: any) => supabase.auth.signIn(data),
+    authProvider: (data: any) => supabase.auth.signIn({
+      provider: data,
+    }),
     signOut: () => supabase.auth.signOut(),
     user,
   };

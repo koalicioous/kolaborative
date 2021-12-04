@@ -21,7 +21,7 @@ export default function Authentication() {
         {
           authState === AuthenticationState.LOGIN
           ? <LoginComponent handleChangeState={handleChangeState} />
-          : <SignUpComponent />
+          : <SignUpComponent handleChangeState={handleChangeState} />
         }
       </div>
     </section>

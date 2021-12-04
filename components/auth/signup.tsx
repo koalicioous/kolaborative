@@ -31,7 +31,11 @@ interface Validation {
   passwordMatch: boolean,
 }
 
-export default function SignUpComponent() {
+interface SignupComponentProps {
+  handleChangeState: () => void;
+}
+
+export default function SignUpComponent({ handleChangeState }: SignupComponentProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<{ message: String, status: Number}>();
   const [newUserData, setNewUserData] = useState<NewUserData>({
@@ -183,6 +187,9 @@ export default function SignUpComponent() {
         <LoadingButton loading={loading} variant="contained" onClick={handleSubmitForm}>
           Register
         </LoadingButton>
+        <button type="button" className="text-xs text-blue-600 hover:text-blue-700 font-medium" onClick={() => handleChangeState()}>
+          Sudah punya akun? Klik untuk login
+        </button>
       </Stack>
     </>
   );

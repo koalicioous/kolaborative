@@ -1,13 +1,14 @@
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Image from 'next/image';
 import {
   Stack,
   TextField,
   IconButton,
+  Button,
   FormControl,
   InputLabel,
   OutlinedInput,
-  Divider,
   InputAdornment,
 } from '@mui/material';
 import { Visibility, VisibilityOff } from '@mui/icons-material';
@@ -45,7 +46,7 @@ export default function LoginComponent({ handleChangeState }: LoginComponentProp
   const [loading, setLoading] = useState<boolean>(false);
   const [authError, setAuthError] = useState<{ message: String, status: Number}>();
 
-  const { signIn } = useAuth();
+  const { signIn, authProvider } = useAuth();
   const handlePasswordVisible = () => {
     setLoginData({
       ...loginData,
@@ -79,6 +80,16 @@ export default function LoginComponent({ handleChangeState }: LoginComponentProp
       email: loginData.email.length < 1,
       password: loginData.password.length < 1,
     });
+  };
+
+  const handleGoogleAuth = async () => {
+    const { error } = await authProvider('google')
+      .then((response: any) => {
+        setLoading(false);
+        return response;
+      });
+    if (error) return setAuthError(error);
+    return router.push('/myprofile');
   };
 
   return (
@@ -138,7 +149,21 @@ export default function LoginComponent({ handleChangeState }: LoginComponentProp
           Belum punya akun? Klik untuk mendaftar
         </button>
       </Stack>
-      <Divider />
+      <Button
+        variant="outlined"
+        className="mt-5"
+        fullWidth
+        onClick={() => handleGoogleAuth()}
+      >
+        <Image
+          src="/google.svg"
+          width={16}
+          height={16}
+        />
+        <span className="ml-2">
+          Masuk dengan Google
+        </span>
+      </Button>
     </>
   );
 }
