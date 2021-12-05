@@ -103,6 +103,7 @@ export default function CreateTalentInputMaterial(
         },
       );
     }
+    console.log(newTalent)
     return setValidation({
       major: newTalent.major.length < 1,
       description: newTalent.description.length < 1,
@@ -175,7 +176,7 @@ export default function CreateTalentInputMaterial(
             className="col-span-3"
             renderInput={(params) => (
               // eslint-disable-next-line react/jsx-props-no-spreading
-              <TextField {...params} label="Jurusan" />
+              <TextField {...params} label="Jurusan" error={validation.major} />
             )}
           />
           {/* <TextField
