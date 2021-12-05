@@ -15,7 +15,7 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
         <div className="flex items-center">
           <GraduationHatSolid className="pt-1 h-8 w-6 text-blue-600 flex justify-center items-center -my-1" />
           <h1 className="font-bold text-lg text-blue-600 ml-1">
-            {talent.major.name}
+            {talent.major.name ?? talent.major}
           </h1>
         </div>
         <div className="flex items-center">
@@ -29,11 +29,11 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
         </div>
       </div>
       <div className="mt-3">
-        <h2 className="text-lg text-gray-700 font-bold">Deskripsi Tugas</h2>
+        <h2 className="text-base text-gray-700 font-bold">Deskripsi Tugas</h2>
         <p>{talent.description}</p>
       </div>
       <div className="mt-4">
-        <h2 className="text-lg text-gray-700 font-bold">Skill yang Diharapkan:</h2>
+        <h2 className="text-base text-gray-700 font-bold">Skill yang Diharapkan:</h2>
         <ul className="list-disc list-inside">
           {
             talent.skills.map((skill) => (
