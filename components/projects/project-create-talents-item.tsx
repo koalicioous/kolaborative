@@ -15,7 +15,7 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
         <div className="flex items-center">
           <GraduationHatSolid className="pt-1 h-8 w-6 text-blue-600 flex justify-center items-center -my-1" />
           <h1 className="font-bold text-lg text-blue-600 ml-1">
-            {talent.major}
+            {talent.major.name}
           </h1>
         </div>
         <div className="flex items-center">

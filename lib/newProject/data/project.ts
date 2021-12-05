@@ -13,7 +13,7 @@ export type Goal = {
 
 export type Talent = {
   id: string,
-  major: string,
+  major: { id: string, name: string},
   amount: number,
   description: string,
   skills: string[]

@@ -3,6 +3,7 @@ import { ReactElement } from 'react';
 import BasicLayout from '../../components/layout/base/basic-layout';
 import MyProjectsCreateSection from '../../components/myprojects/myprojects-create-section';
 import { useAuth } from '../../context/auth';
+import Unauthorized from '../../components/auth/unauthorized';
 
 export default function MyProjects() {
   const { user } = useAuth();
@@ -17,11 +18,7 @@ export default function MyProjects() {
       {
         user
           ? <MyProjectsCreateSection />
-          : (
-            <div>
-              Whoops!
-            </div>
-          )
+          : <Unauthorized />
       }
     </>
   );

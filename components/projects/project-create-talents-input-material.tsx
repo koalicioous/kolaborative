@@ -20,7 +20,10 @@ import { Major } from '../../lib/filterProject/data/filters';
 
 const defaultTalent = {
   id: uuid4(),
-  major: '',
+  major: {
+    id: '',
+    name: '',
+  },
   amount: 1,
   description: '',
   skills: [],
@@ -86,6 +89,7 @@ export default function CreateTalentInputMaterial(
   };
 
   const handleInsertTalent = () => {
+    // console.log(newTalent);
     if (newTalent.major && newTalent.description) {
       if (edit) {
         dispatch(
@@ -103,9 +107,8 @@ export default function CreateTalentInputMaterial(
         },
       );
     }
-    console.log(newTalent)
     return setValidation({
-      major: newTalent.major.length < 1,
+      major: newTalent.major === null,
       description: newTalent.description.length < 1,
     });
   };
@@ -124,7 +127,7 @@ export default function CreateTalentInputMaterial(
             value={newTalent.major}
             onChange={(event, newValue: any) => {
               if (typeof newValue === 'string') {
-                setNewTalent({ ...newTalent, major: newValue });
+                setNewTalent({ ...newTalent, major: { ...newTalent.major, name: newValue } });
               } else if (newValue && newValue.inputValue) {
                 // Create a new value from the user input
                 setNewTalent({ ...newTalent, major: newValue.inputValue });
