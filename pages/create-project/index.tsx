@@ -9,17 +9,13 @@ import CreateProjectTab from '../../components/tabs/create-project-tab';
 import ProjectCreateTalents from '../../components/projects/project-create-talents';
 import supabase from '../../lib/supabase/client';
 import { Major, Skill, Event } from '../../lib/filterProject/data/filters';
+import { useAuth } from '../../context/auth';
+import Unauthorized from '../../components/auth/unauthorized';
 
-export async function getServerSideProps({ req }: any) {
-  const { user } = await supabase.auth.api.getUserByCookie(req);
+export async function getStaticProps() {
   const { data: majors } = await supabase.from('majors').select('*');
   const { data: skills } = await supabase.from('skills').select('*');
   const { data: events } = await supabase.from('skills').select('*');
-
-  if (!user) {
-    // If no user, redirect to index.
-    return { props: {}, redirect: { destination: '/myprofile', permanent: false } };
-  }
 
   // If there is a user, return it.
   return {
@@ -41,6 +37,7 @@ export default function CreateProject({ fallback }: CreateProjectProps) {
   const { query } = useRouter();
   const step: string = query.step as string;
   const isDetailStep: boolean = step ? step === STEP_DETAIL : true;
+  const { user } = useAuth();
 
   return (
     <>
@@ -50,14 +47,20 @@ export default function CreateProject({ fallback }: CreateProjectProps) {
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
-      <SWRConfig value={{ fallback }}>
-        <CreateProjectTab step={step} />
-        {
-          isDetailStep
-            ? <ProjectCreateDetailMaterial />
-            : <ProjectCreateTalents />
-        }
-      </SWRConfig>
+      {
+        user
+          ? (
+            <SWRConfig value={{ fallback }}>
+              <CreateProjectTab step={step} />
+              {
+                isDetailStep
+                  ? <ProjectCreateDetailMaterial />
+                  : <ProjectCreateTalents />
+              }
+            </SWRConfig>
+          )
+          : <Unauthorized />
+      }
     </>
   );
 }
