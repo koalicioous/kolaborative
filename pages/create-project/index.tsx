@@ -1,4 +1,5 @@
 import { ReactElement } from 'react';
+import { SWRConfig } from 'swr';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import CreateProjectLayout from '../../components/layout/base/create-project-layout';
@@ -7,9 +8,13 @@ import { STEP_DETAIL } from '../../constants/global';
 import CreateProjectTab from '../../components/tabs/create-project-tab';
 import ProjectCreateTalents from '../../components/projects/project-create-talents';
 import supabase from '../../lib/supabase/client';
+import { Major, Skill, Event } from '../../lib/filterProject/data/filters';
 
 export async function getServerSideProps({ req }: any) {
   const { user } = await supabase.auth.api.getUserByCookie(req);
+  const { data: majors } = await supabase.from('majors').select('*');
+  const { data: skills } = await supabase.from('skills').select('*');
+  const { data: events } = await supabase.from('skills').select('*');
 
   if (!user) {
     // If no user, redirect to index.
@@ -17,10 +22,22 @@ export async function getServerSideProps({ req }: any) {
   }
 
   // If there is a user, return it.
-  return { props: {} };
+  return {
+    props: {
+      fallback: {
+        majors,
+        skills,
+        events,
+      },
+    },
+  };
 }
 
-export default function CreateProject() {
+interface CreateProjectProps {
+  fallback: Major[] | Skill[] | Event[]
+}
+
+export default function CreateProject({ fallback }: CreateProjectProps) {
   const { query } = useRouter();
   const step: string = query.step as string;
   const isDetailStep: boolean = step ? step === STEP_DETAIL : true;
@@ -33,12 +50,14 @@ export default function CreateProject() {
         </title>
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
       </Head>
-      <CreateProjectTab step={step} />
-      {
-        isDetailStep
-          ? <ProjectCreateDetailMaterial />
-          : <ProjectCreateTalents />
-      }
+      <SWRConfig value={{ fallback }}>
+        <CreateProjectTab step={step} />
+        {
+          isDetailStep
+            ? <ProjectCreateDetailMaterial />
+            : <ProjectCreateTalents />
+        }
+      </SWRConfig>
     </>
   );
 }

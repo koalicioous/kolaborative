@@ -21,7 +21,7 @@ interface SearchFilterProps {
 }
 
 const filterFetcher = async (field: string) => {
-  const { data } = await supabase.from<Major|Skill>(field).select('*');
+  const { data } = await supabase.from<Major|Skill|Event>(field).select('*');
   return data;
 };
 
