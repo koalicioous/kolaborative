@@ -12,7 +12,7 @@ import FormControl from '@mui/material/FormControl';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 import DeleteIconSolid from '../ui/icons/solid/delete-icon';
-import { Talent } from '../../lib/newProject/data/project';
+import { Talent, Skill } from '../../lib/newProject/data/project';
 import { useStore } from '../../lib/newProject/stores/createProject';
 import { NewProjectTalentActionType } from '../../lib/newProject/actions/NewProjectTalentsAction';
 import supabase from '../../lib/supabase/client';
@@ -27,6 +27,11 @@ const defaultTalent = {
   amount: 1,
   description: '',
   skills: [],
+};
+
+const defaultSkill = {
+  id: 0,
+  name: '',
 };
 
 interface CreateTalentInputProps {
@@ -44,7 +49,7 @@ interface OptionType {
 }
 
 const filterFetcher = async (field: string) => {
-  const { data } = await supabase.from<Major|OptionType>(field).select('*');
+  const { data } = await supabase.from<Major|Skill|OptionType>(field).select('*');
   return data;
 };
 
@@ -56,30 +61,33 @@ export default function CreateTalentInputMaterial(
   } : CreateTalentInputProps,
 ) {
   const [newTalent, setNewTalent] = useState<Talent>(talent || defaultTalent);
-  const [newSkill, setNewSkill] = useState<string>('');
+  const [newSkill, setNewSkill] = useState<Skill>(defaultSkill);
   const [validation, setValidation] = useState({
     major: false,
     description: false,
   });
   const { data: majors } = useSWR('majors', filterFetcher);
-  // const { data: skills } = useSWR('skills', filterFetcher);
+  const { data: skills } = useSWR('skills', filterFetcher);
 
   const [edit] = useState<boolean|undefined>(isEditing);
   const { project, dispatch } = useStore();
   const majorName = useRef<HTMLInputElement>(null);
 
-  const handleAddSkill = (skill: string) => {
-    if (newTalent.skills.includes(skill)) return false;
-    setNewTalent({
-      ...newTalent,
-      skills: [...newTalent.skills, skill],
-    });
-    return setNewSkill('');
+  const handleAddSkill = (skill: Skill | undefined) => {
+    if (skill && 'name' in skill && skill.name !== '' && /^\S[a-zA-Z ]*$/.test(skill.name)) {
+      if (newTalent.skills.filter((item) => item.name === skill.name).length > 0) return false;
+      setNewTalent({
+        ...newTalent,
+        skills: [...newTalent.skills, skill],
+      });
+      return setNewSkill(defaultSkill);
+    }
+    return false;
   };
 
-  const handleDeleteSkill = (skill: string) => setNewTalent({
+  const handleDeleteSkill = (skill: Skill) => setNewTalent({
     ...newTalent,
-    skills: [...newTalent.skills.filter((item) => item !== skill)],
+    skills: [...newTalent.skills.filter((item) => item.id !== skill.id)],
   });
 
   const newSkillKeyPress = (event: any) => {
@@ -147,7 +155,7 @@ export default function CreateTalentInputMaterial(
               if (inputValue !== '' && !isExisting) {
                 filtered.push({
                   inputValue,
-                  name: `Add "${inputValue}"`,
+                  name: inputValue,
                   id: '',
                 });
               }
@@ -245,18 +253,18 @@ export default function CreateTalentInputMaterial(
             {
               newTalent.skills.map((skill) => (
                 <Chip
-                  key={skill}
-                  label={skill}
+                  key={skill.name}
+                  label={skill.name}
                   onDelete={() => handleDeleteSkill(skill)}
                   color="primary"
                   variant="outlined"
-                  className="mr-2 mt-2"
+                  style={{ margin: '2px' }}
                 />
               ))
             }
           </div>
         </div>
-        <TextField
+        {/* <TextField
           id="newTalentSkill"
           label="Tambahkan skill yang dibutuhkan"
           size="small"
@@ -266,6 +274,64 @@ export default function CreateTalentInputMaterial(
             if (event.nativeEvent.data !== ',') setNewSkill(event.target.value);
           }}
           helperText="Tekan koma atau enter untuk menambahkan"
+        /> */}
+        <Autocomplete
+          value={newSkill?.name}
+          onKeyPress={newSkillKeyPress}
+          onChange={(event, newValue: any) => {
+            if (typeof newValue === 'string') {
+              setNewSkill({ ...newSkill, name: newValue });
+            } else if (newValue && newValue.inputValue) {
+              // Create a new value from the user input
+              setNewSkill({ ...newSkill, name: newValue.inputValue });
+            } else if (newValue === null) {
+              setNewSkill(defaultSkill);
+            } else {
+              setNewSkill(newValue);
+            }
+          }}
+          filterOptions={(options, params) => {
+            const filtered = filter(options, params);
+            const { inputValue } = params;
+            // Suggest the creation of a new value
+            const isExisting = options.some((option) => inputValue === option.name);
+            if (inputValue !== '' && !isExisting) {
+              filtered.push({
+                inputValue,
+                name: inputValue,
+                id: '',
+              });
+            }
+
+            return filtered;
+          }}
+          selectOnFocus
+          clearOnBlur
+          handleHomeEndKeys
+          id="free-solo-with-text-demo"
+          options={skills!}
+          getOptionLabel={(option) => {
+            // Value selected with enter, right from the input
+            if (typeof option === 'string') {
+              return option;
+            }
+            // Add "xxx" option created dynamically
+            if (option.name) {
+              return option.name;
+            }
+            // Regular option
+            return option.name;
+          }}
+          // eslint-disable-next-line react/jsx-props-no-spreading
+          renderOption={(props, option) => <li {...props}>{option.name}</li>}
+          fullWidth
+          freeSolo
+          size="small"
+          className="col-span-3"
+          renderInput={(params) => (
+            // eslint-disable-next-line react/jsx-props-no-spreading
+            <TextField {...params} label="Skills" error={validation.major} helperText="Tekan Enter untuk menambahkan." />
+          )}
         />
       </Stack>
       <div className="mt-4 flex">
