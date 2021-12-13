@@ -149,8 +149,7 @@ export default function ProjectCreateDetailMaterial() {
         <LocalizationProvider dateAdapter={AdapterDateFns}>
           <DatePicker
             label="Deadline Pendaftaran"
-            // inputFormat="dd/MM/yyyy"
-            views={['day', 'month', 'year']}
+            inputFormat="dd/MM/yyyy"
             value={project.registrationDeadline || null}
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,

@@ -1,4 +1,7 @@
+import { Skill } from '../../../lib/filterProject/data/filters';
+import { Talent } from '../../../lib/newProject/data/project';
 import { useStore } from '../../../lib/newProject/stores/createProject';
+import supabase from '../../../lib/supabase/client';
 
 export default function CreateProjectAction() {
   const { project } = useStore();
@@ -9,8 +12,33 @@ export default function CreateProjectAction() {
   && project.talents.length > 0;
   const SUBMIT_BUTTON_CLASS: string = IS_ENABLED ? ACTIVE_CLASS : INACTIVE_CLASS;
 
-  const handleSubmitProject = () => {
-    console.log(project);
+  const handleSubmitProject = async () => {
+    const SKILLS: Skill[] = [];
+    project.talents.map((talent: Talent) => talent.skills.map(
+      (skill: Skill) => {
+        if (SKILLS.filter((item) => item.name === skill.name).length < 1) return SKILLS.push(skill);
+        return false;
+      },
+    ));
+    const { data: NEW_INSERTED_SKILLS } = await supabase
+      .from<Skill>('skills')
+      .insert(SKILLS.filter(
+        (skill: Skill) => skill.id === 0,
+      ).map((item: Skill) => ({ name: item.name })));
+    if (NEW_INSERTED_SKILLS) {
+      project.talents.map((talent: Talent, index: number) => {
+        project.talents[index].skills = talent.skills.map(
+          (skill: Skill) => {
+            const NEW_SKILL = NEW_INSERTED_SKILLS.filter((item: Skill) => item.name === skill.name);
+            if (NEW_SKILL.length > 0) {
+              return NEW_SKILL[0];
+            }
+            return skill;
+          },
+        );
+        return true;
+      });
+    }
   };
 
   return (

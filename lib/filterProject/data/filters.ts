@@ -6,7 +6,7 @@ export type Major = {
 };
 
 export type Skill = {
-    id: string,
+    id: number,
     name: string,
 };
 
