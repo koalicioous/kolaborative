@@ -30,7 +30,7 @@ export default function CreateProjectTab({ step }: CreateProjectTabProps) {
     : (isDetailCompleted ? completedClass : inactiveClass);
 
   return (
-    <section className="max-w-lg mx-auto bg-gray-50 border-b border-gray-200 flex px-3 py-2 overflow-x-auto sticky top-12" style={{ zIndex: 98 }}>
+    <section className="max-w-lg mx-auto bg-gray-50 border-b border-gray-200 flex px-3 py-2 overflow-x-auto sticky top-12" style={{ zIndex: 97 }}>
       <Link href={{ pathname: '/create-project', query: { step: STEP_DETAIL } }}>
         <a className={`transition-all mr-3 w-full shadow flex flex-grow items-center justify-center rounded-full text-center font-bold text-xs px-3 whitespace-nowrap ${detailClass}`}>
           <InfoCircleSolid className="mt-1 h-5 flex justify-center items-center w-6" />

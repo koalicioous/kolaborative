@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 export type Project = {
   readonly slug: string,
   readonly name: string,
@@ -25,15 +26,22 @@ export type Talent = {
 }
 
 export interface NewProject {
+  id?: number,
   name: string,
   isPrivate: boolean,
   event?: string,
   registrationDeadline: string,
   description: string,
   goals: Goal[],
-  startDate?: string,
-  finishDate?: string,
+  startDate: string | null,
+  finishDate: string | null,
   talents: Talent[],
+  event_id?: string | { id: string, name: string },
+  registration_deadline?: string,
+  start_date?: string | null,
+  finish_date?: string | null,
+  is_private?: boolean,
+  project_goals?: Goal[],
 }
 
 export const InitialState: NewProject = {
@@ -43,7 +51,7 @@ export const InitialState: NewProject = {
   registrationDeadline: '',
   description: '',
   goals: [],
-  startDate: '',
-  finishDate: '',
+  startDate: null,
+  finishDate: null,
   talents: [],
 };

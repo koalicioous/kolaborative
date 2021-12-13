@@ -15,6 +15,7 @@ import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import Button from '@mui/material/Button';
 import Autocomplete, { createFilterOptions } from '@mui/material/Autocomplete';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import format from 'date-fns/format';
 import supabase from '../../lib/supabase/client';
 import { Goal } from '../../lib/newProject/data/project';
 import { useStore } from '../../lib/newProject/stores/createProject';
@@ -229,7 +230,7 @@ export default function ProjectCreateDetailMaterial() {
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'startDate',
-              payload: value,
+              payload: format(value, 'yyyy-MM-dd HH:mm:ssX'),
             })}
             // eslint-disable-next-line react/jsx-props-no-spreading
             renderInput={(params) => <TextField fullWidth {...params} size="small" />}
@@ -243,7 +244,7 @@ export default function ProjectCreateDetailMaterial() {
             onChange={(value) => dispatch({
               type: NewProjectDetailActionType.UPDATE_FIELD,
               field: 'finishDate',
-              payload: value,
+              payload: format(value, 'yyyy-MM-dd HH:mm:ssxxx'),
             })}
             // eslint-disable-next-line react/jsx-props-no-spreading
             renderInput={(params) => <TextField fullWidth {...params} size="small" />}
