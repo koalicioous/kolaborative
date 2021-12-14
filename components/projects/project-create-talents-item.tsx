@@ -5,17 +5,22 @@ import GraduationHatSolid from '../ui/icons/solid/graduation-hat';
 
 interface TalentItemProps {
     talent: Talent
-    editTalent: Dispatch<SetStateAction<string>>
+    // eslint-disable-next-line react/require-default-props
+    editTalent?: Dispatch<SetStateAction<string>>
 }
 
 export default function TalentItem({ talent, editTalent }: TalentItemProps) {
   return (
-    <div className="p-4 bg-blue-50 rounded-md flex flex-col border">
+    <div className="p-4 bg-blue-50 rounded-md flex flex-col mb-2">
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <GraduationHatSolid className="pt-1 h-8 w-6 text-blue-600 flex justify-center items-center -my-1" />
           <h1 className="font-bold text-lg text-blue-600 ml-1">
-            {talent.major.name ?? talent.major}
+            {
+              'majors' in talent
+                ? talent.majors?.name
+                : (talent.major.name ?? talent.major)
+            }
           </h1>
         </div>
         <div className="flex items-center">
@@ -44,15 +49,20 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
           }
         </ul>
       </div>
-      <button
-        type="button"
-        className="transition-all py-2 text-sm -mx-4 -mb-4 mt-4 rounded-b-md text-blue-400 font-medium flex-grow text-center bg-blue-100 hover:bg-blue-200 hover:text-blue-600"
-        onClick={() => {
-          editTalent(talent.id);
-        }}
-      >
-        Klik untuk mengubah
-      </button>
+      {
+        editTalent
+        && (
+        <button
+          type="button"
+          className="transition-all py-2 text-sm -mx-4 -mb-4 mt-4 rounded-b-md text-blue-400 font-medium flex-grow text-center bg-blue-100 hover:bg-blue-200 hover:text-blue-600"
+          onClick={() => {
+            editTalent(talent.id);
+          }}
+        >
+          Klik untuk mengubah
+        </button>
+        )
+      }
     </div>
   );
 }

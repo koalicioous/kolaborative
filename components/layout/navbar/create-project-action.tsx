@@ -46,7 +46,7 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
           .insert(NOT_INSERTED_SKILLS.map((item: Skill) => ({ name: item.name })));
         if (NEW_INSERTED_SKILLS) {
           project.talents.map((talent: Talent, index: number) => {
-            project.talents[index].skills = talent.skills.map(
+            project.talents[index].skills = project.talents[index].skills.map(
               (skill: Skill) => {
                 const NEW_SKILL = NEW_INSERTED_SKILLS.filter(
                   (item: Skill) => item.name === skill.name,
@@ -112,7 +112,7 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
       }
       // Create Project Talent Requirements
       if (NEW_PROJECT && NEW_PROJECT.length > 0) {
-        project.talents.map(async (talent: Talent) => {
+        project.talents.map(async (talent: Talent, index: number) => {
           const { data: NEW_REQUIRED_TALENTS } = await supabase
             .from('project_requirements')
             .insert([{
@@ -122,17 +122,16 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
               project_id: NEW_PROJECT[0].id,
             }]);
           if (NEW_REQUIRED_TALENTS) {
-            const { data: TALENT_SKILLS_RELATION } = await project.talents.map((item: Talent) => {
-              item.skills.map(async (skill: Skill) => {
+            const { data: TALENT_SKILLS_RELATION } = await project.talents[index].skills.map(
+              async (skill: Skill) => {
                 await supabase
                   .from('project_requirement_skills')
                   .insert([{
                     skill_id: skill.id,
                     requirement_id: NEW_REQUIRED_TALENTS[0].id,
                   }]);
-              });
-              return true;
-            });
+              },
+            );
             if (TALENT_SKILLS_RELATION) router.push({ pathname: '/myprojects' });
           }
         });

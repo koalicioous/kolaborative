@@ -1,12 +1,4 @@
 /* eslint-disable camelcase */
-export type Project = {
-  readonly slug: string,
-  readonly name: string,
-  readonly description?: string,
-  readonly goal?: string,
-  readonly duration?: string,
-}
-
 export type Goal = {
   id: string,
   description: string,
@@ -20,9 +12,20 @@ export type Skill = {
 export type Talent = {
   id: string,
   major: { id: string, name: string},
+  majors?: { id: string, name: string},
   amount: number,
   description: string,
   skills: Skill[]
+}
+
+export type Project = {
+  readonly slug: string,
+  readonly name: string,
+  readonly description?: string,
+  readonly project_goals?: Goal[],
+  readonly project_requirements?: Talent[],
+  readonly duration?: string,
+  readonly events: { id: string, name: string }
 }
 
 export interface NewProject {
