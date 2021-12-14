@@ -89,6 +89,7 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
         .from<NewProject>('projects')
         .insert([{
           name: project.name,
+          slug: [...project.name.split(' '), String(Date.now()).substring(6, 12)].join('-'),
           event_id: participatingEvent.id ? participatingEvent.id : participatingEvent,
           registration_deadline: new Date(project.registrationDeadline).toISOString(),
           start_date: project.startDate ? new Date(project.startDate).toISOString() : null,

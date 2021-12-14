@@ -4,6 +4,7 @@ import BasicLayout from '../../components/layout/base/basic-layout';
 import MyProjectsCreateSection from '../../components/myprojects/myprojects-create-section';
 import { useAuth } from '../../context/auth';
 import Unauthorized from '../../components/auth/unauthorized';
+import ProjectList from '../../components/myprojects/myprojects-project-list';
 
 export default function MyProjects() {
   const { user } = useAuth();
@@ -17,7 +18,12 @@ export default function MyProjects() {
       </Head>
       {
         user
-          ? <MyProjectsCreateSection />
+          ? (
+            <section className="bg-white">
+              <MyProjectsCreateSection />
+              <ProjectList />
+            </section>
+          )
           : <Unauthorized />
       }
     </>

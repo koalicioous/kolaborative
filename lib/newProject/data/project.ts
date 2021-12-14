@@ -27,6 +27,7 @@ export type Talent = {
 
 export interface NewProject {
   id?: number,
+  slug?: string,
   name: string,
   isPrivate: boolean,
   event?: string,

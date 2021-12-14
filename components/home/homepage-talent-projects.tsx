@@ -1,4 +1,3 @@
-import ProjectItem from '../projects/project-item';
 import ClockIconSolid from '../ui/icons/solid/clock-icon';
 
 export default function HomePageTalentProjects() {
@@ -9,13 +8,6 @@ export default function HomePageTalentProjects() {
         <h2 className="ml-2 text-md md:text-xl font-bold text-blue-600">
           Deadline Pendaftaran Sebentar Lagi
         </h2>
-      </div>
-      <div>
-        <ProjectItem className="mt-4" />
-        <ProjectItem className="mt-4" />
-        <ProjectItem className="mt-4" />
-        <ProjectItem className="mt-4" />
-        <ProjectItem className="mt-4" />
       </div>
     </div>
   );
