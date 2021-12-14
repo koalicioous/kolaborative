@@ -9,9 +9,10 @@ interface ProjectDetailTitleProps {
 export default function ProjectDetailTitle({ title, event }: ProjectDetailTitleProps) {
   return (
     <div className="max-w-lg mx-auto bg-white px-5 py-4">
-      <span className="text-xs px-4 py-1 bg-gray-200 rounded-md">{ event }</span>
-      <span className="ml-4 text-xs">Universitas Islam Indonesia</span>
-      <h1 className="mt-4 text-blue-700 font-bold">
+      <div className="flex sm:items-center sm:justify-between">
+        <p className="text-xs px-2 py-1 bg-gray-200 rounded-md truncate">{ event }</p>
+      </div>
+      <h1 className="my-3 text-xl sm:text-3xl text-blue-700 font-bold">
         {title}
       </h1>
       <p className="text-xs flex items-center flex-wrap">
@@ -24,6 +25,7 @@ export default function ProjectDetailTitle({ title, event }: ProjectDetailTitleP
           Fayruz Rahma
         </span>
       </p>
+      <p className="mt-3 sm:mt-4 text-xs sm:text-base">Universitas Islam Indonesia</p>
     </div>
   );
 }

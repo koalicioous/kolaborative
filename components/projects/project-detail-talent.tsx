@@ -18,19 +18,21 @@ export default function ProjectDetailTalent({ talents }: ProjectDetailTalentProp
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <h2 className="text-xs font-bold text-blue-700">
+          <h2 className="text-xs sm:text-base font-bold text-blue-700">
             Required Talents
           </h2>
         </AccordionSummary>
         <AccordionDetails>
-          {
-            talents.length > 0
-            && (
-              talents.map((talent: Talent) => (
-                <TalentItem talent={talent} key={talent.id} />
-              ))
-            )
-          }
+          <div className="-my-4">
+            {
+              talents.length > 0
+              && (
+                talents.map((talent: Talent) => (
+                  <TalentItem talent={talent} key={talent.id} />
+                ))
+              )
+            }
+          </div>
         </AccordionDetails>
       </Accordion>
     </div>

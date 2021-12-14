@@ -15,7 +15,7 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
       <div className="flex items-center justify-between">
         <div className="flex items-center">
           <GraduationHatSolid className="pt-1 h-8 w-6 text-blue-600 flex justify-center items-center -my-1" />
-          <h1 className="font-bold text-lg text-blue-600 ml-1">
+          <h1 className="font-bold text-xs sm:text-base text-blue-600 ml-1">
             {
               'majors' in talent
                 ? talent.majors?.name
@@ -23,7 +23,7 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
             }
           </h1>
         </div>
-        <div className="flex items-center">
+        <div className="flex items-center text-xs sm:text-base">
           <UsersSolid className="pt-3 h-10 w-8 text-blue-600 flex justify-center items-center -my-1" />
           <span className="font-semibold text-blue-600">
             {talent.amount}
@@ -34,15 +34,15 @@ export default function TalentItem({ talent, editTalent }: TalentItemProps) {
         </div>
       </div>
       <div className="mt-3">
-        <h2 className="text-base text-gray-700 font-bold">Deskripsi Tugas</h2>
-        <p>{talent.description}</p>
+        <h2 className="text-xs sm:text-base text-gray-700 font-bold">Deskripsi Tugas</h2>
+        <p className="text-xs sm:text-base">{talent.description}</p>
       </div>
       <div className="mt-4">
-        <h2 className="text-base text-gray-700 font-bold">Skill yang Diharapkan:</h2>
+        <h2 className="text-xs sm:text-base text-gray-700 font-bold">Skill yang Diharapkan:</h2>
         <ul className="list-disc list-inside">
           {
             talent.skills.map((skill) => (
-              <li className="my-1" key={skill.name}>
+              <li className="my-1 text-xs sm:text-base capitalize" key={skill.name}>
                 {skill.name}
               </li>
             ))

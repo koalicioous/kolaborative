@@ -6,7 +6,7 @@ import { Project } from '../../lib/newProject/data/project';
 import ProjectDetailTitle from '../../components/projects/project-detail-title';
 import ProjectDetailDescription from '../../components/projects/project-detail-description';
 import ProjectDetailGoal from '../../components/projects/project-detail-goal';
-import ProjectDetailDuration from '../../components/projects/project-detail-duration';
+// import ProjectDetailDuration from '../../components/projects/project-detail-duration';
 import ProjectDetailBar from '../../components/projects/project-detail-bar';
 import ProjectDetailTalent from '../../components/projects/project-detail-talent';
 
