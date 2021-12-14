@@ -125,7 +125,7 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
             const { data: TALENT_SKILLS_RELATION } = await project.talents[index].skills.map(
               async (skill: Skill) => {
                 await supabase
-                  .from('project_requirement_skills')
+                  .from('project_requirement_skill')
                   .insert([{
                     skill_id: skill.id,
                     requirement_id: NEW_REQUIRED_TALENTS[0].id,

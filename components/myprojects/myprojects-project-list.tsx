@@ -44,7 +44,7 @@ export default function ProjectList() {
               <ProjectItem
                 key={item.projects.id}
                 className=""
-                data={item}
+                data={item.projects}
               />
             </div>
           ))
