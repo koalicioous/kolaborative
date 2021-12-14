@@ -12,7 +12,7 @@ interface ProjectDetailTalentProps {
 export default function ProjectDetailTalent({ talents }: ProjectDetailTalentProps) {
   return (
     <div className="max-w-lg mx-auto bg-white border-t-2">
-      <Accordion>
+      <Accordion defaultExpanded>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"

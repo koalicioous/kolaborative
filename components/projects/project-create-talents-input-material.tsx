@@ -30,7 +30,7 @@ const defaultTalent = {
 };
 
 const defaultSkill = {
-  id: 0,
+  id: '0',
   name: '',
 };
 

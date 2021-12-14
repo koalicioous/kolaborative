@@ -6,7 +6,7 @@ import { Project } from '../../lib/newProject/data/project';
 import ProjectDetailTitle from '../../components/projects/project-detail-title';
 import ProjectDetailDescription from '../../components/projects/project-detail-description';
 import ProjectDetailGoal from '../../components/projects/project-detail-goal';
-// import ProjectDetailDuration from '../../components/projects/project-detail-duration';
+import ProjectDetailDuration from '../../components/projects/project-detail-duration';
 import ProjectDetailBar from '../../components/projects/project-detail-bar';
 import ProjectDetailTalent from '../../components/projects/project-detail-talent';
 
@@ -15,6 +15,9 @@ export async function getServerSideProps({ params }: any) {
     .from<Project>('projects')
     .select(`
       *,
+      user_project (
+        *
+      ),
       project_requirements (
         *,
         majors (
@@ -41,6 +44,7 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
+  console.log(project)
   return (
     <>
       {
@@ -55,7 +59,10 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <ProjectDetailTitle title={project.name} event={project.events.name} />
               <ProjectDetailDescription description={project.description ?? ''} />
               <ProjectDetailGoal goals={project.project_goals ?? []} />
-              {/* <ProjectDetailDuration project={project} /> */}
+              <ProjectDetailDuration
+                startDate={project.start_date}
+                finishDate={project.finish_date}
+              />
               <ProjectDetailTalent talents={project.project_requirements ?? []} />
             </div>
             <ProjectDetailBar />

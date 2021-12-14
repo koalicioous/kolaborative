@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { ReactElement } from 'react';
 import BasicLayout from '../../components/layout/base/basic-layout';
-import ProjectItem from '../../components/projects/project-item';
+// import ProjectItem from '../../components/projects/project-item';
 import Unauthorized from '../../components/auth/unauthorized';
 import { useAuth } from '../../context/auth';
 
@@ -27,11 +27,11 @@ export default function Saved() {
                   Saved Projects
                 </h1>
               </div>
+              {/* <ProjectItem className="mt-4" />
               <ProjectItem className="mt-4" />
               <ProjectItem className="mt-4" />
               <ProjectItem className="mt-4" />
-              <ProjectItem className="mt-4" />
-              <ProjectItem className="mt-4" />
+              <ProjectItem className="mt-4" /> */}
             </div>
           ) : <Unauthorized />
       }

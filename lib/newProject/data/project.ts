@@ -5,7 +5,7 @@ export type Goal = {
 }
 
 export type Skill = {
-  id: number,
+  id: string,
   name: string
 }
 
@@ -24,8 +24,10 @@ export type Project = {
   readonly description?: string,
   readonly project_goals?: Goal[],
   readonly project_requirements?: Talent[],
-  readonly duration?: string,
+  readonly start_date?: string,
+  readonly finish_date?: string,
   readonly events: { id: string, name: string }
+  readonly user_project: {user_id: string}[],
 }
 
 export interface NewProject {

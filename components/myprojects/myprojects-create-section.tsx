@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 export default function MyProjectsCreateSection() {
   return (
-    <div className="max-w-lg mx-auto px-5 py-4 bg-blye-50 flex flex-col">
+    <div className="max-w-lg mx-auto px-5 py-4 bg-blye-50 flex flex-col bg-blue-50 border-b">
       <h1 className="font-semibold text-blue-700">
         Miliki lebih banyak waktu untuk berinovasi dan berkarya.
       </h1>

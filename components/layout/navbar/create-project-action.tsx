@@ -33,12 +33,12 @@ export default function CreateProjectAction({ loading, setLoading }: CreateProje
             if (SKILLS.filter(
               (item) => item.name === skill.name,
             ).length < 1) return SKILLS.push(skill);
-            return false;
+            return 0;
           },
         );
         return MAJORS.push(talent.major);
       });
-      const NOT_INSERTED_SKILLS = SKILLS.filter((skill: Skill) => skill.id === 0);
+      const NOT_INSERTED_SKILLS = SKILLS.filter((skill: Skill) => skill.id === '0');
       const NOT_INSERTED_MAJORS = MAJORS.filter((major: Major) => typeof major === 'string');
       if (NOT_INSERTED_SKILLS.length > 0) {
         const { data: NEW_INSERTED_SKILLS } = await supabase

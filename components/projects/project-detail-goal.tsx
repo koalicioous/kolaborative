@@ -17,14 +17,16 @@ export default function ProjectDetailGoal({ goals }: ProjectDetailDetailProps) {
               <ol className="list-disc ml-5">
                 {
                 goals.map((item: Goal) => (
-                  <li className="my-1">
+                  <li className="my-1" key={item.id}>
                     { item.description }
                   </li>
                 ))
               }
               </ol>
             ) : (
-              ''
+              <div className="p-2 rounded-sm bg-gray-100 text-center text-gray-400">
+                Data tidak tersedia
+              </div>
             )
         }
       </div>

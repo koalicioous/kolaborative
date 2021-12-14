@@ -17,7 +17,7 @@ export default function ProjectItem({ className, data }: ProjectItemProps) {
         <h3 className="mt-2 text-sm font-bold text-blue-700 capitalize">
           { data.projects.name }
         </h3>
-        <p className="mt-5 text-xs">
+        <p className="mt-5 text-xs whitespace-pre">
           Mencari
           <b className="mx-1">
             {`${data.projects.project_requirements.length} Talenta`}
