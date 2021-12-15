@@ -6,11 +6,11 @@ import {
   FilterModalMode, FilterProp, Major, Skill, Event,
 } from '../../lib/filterProject/data/filters';
 import SearchHeader from '../../components/layout/header/search-header';
-import SearchTopProjects from '../../components/search/search-top-projects';
 import SearchFilter from '../../components/search/search-filters';
 import SearchFilterModal from '../../components/search/search-filter-modal';
 import { FiltersContextProvider } from '../../lib/filterProject/store/filters';
 import supabase from '../../lib/supabase/client';
+import SearchBody from '../../components/search/search-body';
 
 interface SearchProps {
   fallback: Major[] | Skill[] | Event[]
@@ -38,8 +38,7 @@ export default function Search({ fallback }: SearchProps) {
           <FiltersContextProvider>
             <SearchHeader setKeyword={setKeyword} />
             <SearchFilter openModal={setModal} query={query} />
-            {/* <SearchMajors /> */}
-            <SearchTopProjects />
+            <SearchBody />
             <>
               {
                 modal.visible
