@@ -14,19 +14,35 @@ export default function SearchBody() {
     (async () => {
       if (
         Object.keys(filters).filter((item: string) => filters[item].length > 0).length > 0
+        || filters.keyword.length > 2
       ) {
         try {
           setLoading(true);
           let queryParams = '*, events (name), project_requirements!inner(*, majors(*))';
-          if (filters.skills.length > 0) queryParams = '*, project_requirements!inner(*, skills!inner(*))';
+          if (filters.skills.length > 0) queryParams = '*, events (name), project_requirements!inner(*, majors(*), skills!inner(*))';
           let query = supabase
             .from('projects')
             .select(queryParams);
           if (filters.skills.length > 0) query = query.in('project_requirements.skills.id', filters.skills.map((item: Skill) => item.id));
           if (filters.events.length > 0) query = query.in('event_id', filters.events.map((item: Event) => item.id));
           if (filters.majors.length > 0) query = query.in('project_requirements.major_id', filters.majors.map((item: Major) => item.id));
+          if (filters.keyword.length > 0) {
+            console.log('keyword: ', filters.keyword);
+            query = query.ilike('name', `%${filters.keyword}%`);
+          }
 
           const { data: results } = await query;
+          setProjects(results);
+        } finally {
+          setLoading(false);
+        }
+      } else {
+        try {
+          setLoading(true);
+          const { data: results } = await supabase
+            .from('projects')
+            .select('*, events (name), project_requirements!inner(*, majors(*))')
+            .range(0, 5);
           setProjects(results);
         } finally {
           setLoading(false);
@@ -80,11 +96,12 @@ export default function SearchBody() {
           <section className="py-3 px-3">
             {
               projects.map((item: Project) => (
-                <ProjectItem
-                  key={item.id}
-                  className=""
-                  data={item}
-                />
+                <div key={item.id} className="mb-2">
+                  <ProjectItem
+                    className=""
+                    data={item}
+                  />
+                </div>
               ))
             }
           </section>
