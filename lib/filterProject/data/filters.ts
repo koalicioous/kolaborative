@@ -35,4 +35,4 @@ export enum FilterModalMode {
   'Event' = 'events',
 }
 
-export const InitialFilters: Filters = {};
+export const InitialFilters: Filters = { majors: [], events: [], skills: []};

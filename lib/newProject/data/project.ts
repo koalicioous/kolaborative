@@ -19,6 +19,7 @@ export type Talent = {
 }
 
 export type Project = {
+  readonly id: string,
   readonly slug: string,
   readonly name: string,
   readonly description?: string,
