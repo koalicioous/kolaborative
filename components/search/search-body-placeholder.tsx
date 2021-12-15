@@ -1,59 +1,36 @@
 import { useEffect, useState } from 'react';
-import { useFilterStore } from '../../lib/filterProject/store/filters';
-import { Major, Skill, Event } from '../../lib/filterProject/data/filters';
-import supabase from '../../lib/supabase/client';
 import { Project } from '../../lib/newProject/data/project';
+import supabase from '../../lib/supabase/client';
 import ProjectItem from '../projects/project-item';
-import ResultPlaceholder from './search-body-placeholder';
 
-export default function SearchBody() {
-  const { filters } = useFilterStore();
+export default function ResultPlaceholder() {
   const [projects, setProjects] = useState<Project[]|null>();
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
-      // console.log(filters.keyword.length);
-      if (
-        Object.keys(filters).filter((item: string) => filters[item].length > 0).length > 0
-      ) {
-        try {
-          setLoading(true);
-          let queryParams = '*, events (name), project_requirements!inner(*, majors(*))';
-          if (filters.skills.length > 0) queryParams = '*, events (name), project_requirements!inner(*, majors(*), skills!inner(*))';
-          let query = supabase
-            .from('projects')
-            .select(queryParams);
-          if (filters.skills.length > 0) query = query.in('project_requirements.skills.id', filters.skills.map((item: Skill) => item.id));
-          if (filters.events.length > 0) query = query.in('event_id', filters.events.map((item: Event) => item.id));
-          if (filters.majors.length > 0) query = query.in('project_requirements.major_id', filters.majors.map((item: Major) => item.id));
-          if (filters.keyword.length > 0) {
-            query = query.ilike('name', `%${filters.keyword}%`);
-          }
-
-          const { data: results } = await query;
-          setProjects(results);
-        } finally {
-          setLoading(false);
-        }
+      try {
+        setLoading(true);
+        const { data: results } = await supabase
+          .from('projects')
+          .select('*, events (name), project_requirements!inner(*, majors(*))')
+          .range(0, 5);
+        setProjects(results);
+      } finally {
+        setLoading(false);
       }
     })();
-  }, [filters]);
-
-  useEffect(() => {
-    (async () => {
-      if (!loading && (!projects || Object.keys(filters).filter(
-        (item: string) => filters[item].length > 0,
-      ).length === 0)) setProjects(null);
-    })();
-  }, [filters]);
+  }, []);
 
   return (
     <section className="max-w-lg mx-auto bg-white">
+      <div className="mx-3">
+        <h1 className="font-bold text-blue-600">🔥 Proyek Terbaru dan Populer</h1>
+      </div>
       {
         loading
         && (
-          <section className="px-3">
+          <section className="px-3 mt-2">
             <div className="border shadow border-gray-50 rounded-md p-4 w-full mx-auto">
               <div className="animate-pulse flex space-x-4">
                 <div className="rounded-full bg-gray-100 h-10 w-10" />
@@ -102,14 +79,6 @@ export default function SearchBody() {
               ))
             }
           </section>
-        )
-      }
-      {
-        !loading && (!projects || Object.keys(filters).filter(
-          (item: string) => filters[item].length > 0,
-        ).length === 0)
-        && (
-          <ResultPlaceholder />
         )
       }
     </section>
