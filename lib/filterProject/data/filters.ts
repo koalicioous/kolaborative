@@ -16,10 +16,10 @@ export type Event = {
 };
 
 export interface Filters {
-    majors?: Major[],
-    skills?: Skill[],
-    events?: Event[],
-    keyword?: string,
+    majors: Major[],
+    skills: Skill[],
+    events: Event[],
+    keyword: string,
 }
 
 export interface FilterProp {

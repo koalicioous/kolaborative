@@ -12,9 +12,9 @@ export default function SearchBody() {
 
   useEffect(() => {
     (async () => {
+      // console.log(filters.keyword.length);
       if (
         Object.keys(filters).filter((item: string) => filters[item].length > 0).length > 0
-        || filters.keyword.length > 2
       ) {
         try {
           setLoading(true);
@@ -27,22 +27,10 @@ export default function SearchBody() {
           if (filters.events.length > 0) query = query.in('event_id', filters.events.map((item: Event) => item.id));
           if (filters.majors.length > 0) query = query.in('project_requirements.major_id', filters.majors.map((item: Major) => item.id));
           if (filters.keyword.length > 0) {
-            console.log('keyword: ', filters.keyword);
             query = query.ilike('name', `%${filters.keyword}%`);
           }
 
           const { data: results } = await query;
-          setProjects(results);
-        } finally {
-          setLoading(false);
-        }
-      } else {
-        try {
-          setLoading(true);
-          const { data: results } = await supabase
-            .from('projects')
-            .select('*, events (name), project_requirements!inner(*, majors(*))')
-            .range(0, 5);
           setProjects(results);
         } finally {
           setLoading(false);
