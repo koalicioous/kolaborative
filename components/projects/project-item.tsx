@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import format from 'date-fns/format';
+import { Talent } from '../../lib/newProject/data/project';
 
 interface ProjectItemProps {
   className: string,
@@ -20,7 +21,7 @@ export default function ProjectItem({ className, data }: ProjectItemProps) {
         <p className="mt-5 text-xs whitespace-pre">
           Mencari
           <b className="mx-1">
-            {`${data.project_requirements.length} Talenta`}
+            {`${data.project_requirements.map((item: Talent) => item.amount).reduce((previousValue: number, currentValue: number) => previousValue + currentValue)} Talenta`}
           </b>
           dari
           <b className="ml-1 truncate">
