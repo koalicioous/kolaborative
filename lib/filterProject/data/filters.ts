@@ -13,7 +13,7 @@ export type ProjectRequirement = {
 export type Skill = {
     id: string,
     name: string,
-    project_requirements: ProjectRequirement[]
+    project_requirements?: ProjectRequirement[]
 };
 
 export type Event = {

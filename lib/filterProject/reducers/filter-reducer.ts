@@ -9,22 +9,22 @@ const FilterReducer = (
     case SetFilterActionType.SET_KEYWORD:
       return {
         ...state,
-        keyword: action.payload.keyword,
+        keyword: action.payload.keyword!,
       };
     case SetFilterActionType.SET_MAJORS:
       return {
         ...state,
-        majors: action.payload.majors,
+        majors: action.payload.majors!,
       };
     case SetFilterActionType.SET_SKILLS:
       return {
         ...state,
-        skills: action.payload.skills,
+        skills: action.payload.skills!,
       };
     case SetFilterActionType.SET_EVENTS:
       return {
         ...state,
-        events: action.payload.events,
+        events: action.payload.events!,
       };
     case SetFilterActionType.RESET_FILTERS:
       return InitialFilters;

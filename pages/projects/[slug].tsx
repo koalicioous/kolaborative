@@ -44,7 +44,6 @@ interface ProjectDetailProps {
 }
 
 export default function ProjectDetail({ project }: ProjectDetailProps) {
-  console.log(project)
   return (
     <>
       {
@@ -59,10 +58,15 @@ export default function ProjectDetail({ project }: ProjectDetailProps) {
               <ProjectDetailTitle title={project.name} event={project.events.name} />
               <ProjectDetailDescription description={project.description ?? ''} />
               <ProjectDetailGoal goals={project.project_goals ?? []} />
-              <ProjectDetailDuration
-                startDate={project.start_date}
-                finishDate={project.finish_date}
-              />
+              {
+                project.start_date && project.finish_date
+                && (
+                  <ProjectDetailDuration
+                    startDate={project.start_date}
+                    finishDate={project.finish_date}
+                  />
+                )
+              }
               <ProjectDetailTalent talents={project.project_requirements ?? []} />
             </div>
             <ProjectDetailBar />

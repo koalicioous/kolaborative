@@ -28,12 +28,14 @@ export default function SkillList() {
         {
             !keyword
               ? skills?.sort(
-                (a, b) => (a.project_requirements.length > b.project_requirements.length ? -1 : 1),
+                (a, b) => (
+                  (a.project_requirements?.length || 0)
+                  > (b.project_requirements?.length || 0) ? -1 : 1),
               ).map((skill) => (
                 <SkillListItem
                   key={skill.name}
                   name={skill.name}
-                  projects={skill.project_requirements.length}
+                  projects={skill.project_requirements?.length}
                 />
               ))
               : skills?.filter((item) => (
@@ -41,13 +43,13 @@ export default function SkillList() {
                   .includes(keyword.toLocaleLowerCase())))
                 .sort(
                   (a, b) => (
-                    a.project_requirements.length > b.project_requirements.length ? -1 : 1
-                  ),
+                    (a.project_requirements?.length || 0)
+                  > (b.project_requirements?.length || 0) ? -1 : 1),
                 ).map((skill) => (
                   <SkillListItem
                     key={skill.name}
                     name={skill.name}
-                    projects={skill.project_requirements.length}
+                    projects={skill.project_requirements?.length}
                   />
                 ))
         }

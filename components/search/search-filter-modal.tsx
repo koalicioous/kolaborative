@@ -17,7 +17,7 @@ import { useFilterStore } from '../../lib/filterProject/store/filters';
 interface SearchFilterModalProps {
     closeModal: Dispatch<SetStateAction<FilterProp>>,
     title: string,
-    data: Major[] | Skill[] | Event[],
+    data: any[],
     mode: FilterModalMode,
 }
 
@@ -27,7 +27,7 @@ export default function SearchFilterModal({
   title,
   mode,
 }: SearchFilterModalProps) {
-  const [filter, setFilter] = useState<Major[]|Skill[]|Event[]>([]);
+  const [filter, setFilter] = useState<any[]>([]);
   const [activeIds, setActiveIds] = useState<string[]>([]);
   const [searchFilterKeyword, setSearchFilterKeyword] = useState<string>('');
   const [modalMode] = useState<FilterModalMode>(mode);
@@ -57,7 +57,7 @@ export default function SearchFilterModal({
       const ids: string[] = filters[mode]
         ? [...filters[mode].map((item: Major | Skill | Event) => item.id)] : [];
       const activeFilters: Major[] | Skill[] | Event[] = data.filter(
-        (item) => ids.includes(item.id),
+        (item: any) => ids.includes(item.id),
       );
       return setFilter(activeFilters);
     })();
@@ -136,7 +136,9 @@ export default function SearchFilterModal({
                           switch (e.target.checked) {
                             case false:
                               return setFilter(
-                                [...filter.filter((removeTarget) => removeTarget.id !== item.id)],
+                                [...filter.filter(
+                                  (removeTarget: any) => removeTarget.id !== item.id,
+                                )],
                               );
                             case true:
                               return setFilter(
