@@ -52,7 +52,7 @@ export default function HomePageTalentEvents() {
           <a className="text-blue-700 hover:bg-blue-50 rounded-md py-2 text-sm flex items-center justify-center">
             <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
             <span>
-              Lihat semua event (25)
+              Lihat semua event (25+)
             </span>
           </a>
         </Link>

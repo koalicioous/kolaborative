@@ -28,7 +28,7 @@ Majors.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticProps() {
-  const { data: skills } = await supabase.from('skills').select('*');
+  const { data: skills } = await supabase.from('skills').select('name, project_requirements(projects(id))');
   return {
     props: {
       fallback: {

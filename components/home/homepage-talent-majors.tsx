@@ -97,7 +97,7 @@ export default function HomePageTalentMajors() {
           <a className="text-blue-700 hover:bg-blue-50 rounded-md py-2 text-sm flex items-center justify-center">
             <EllipsisIconSolid className="w-8 h-8 text-blue-400 pt-2 pl-2" />
             <span>
-              Lihat semua jurusan (131)
+              Lihat semua jurusan (50+)
             </span>
           </a>
         </Link>

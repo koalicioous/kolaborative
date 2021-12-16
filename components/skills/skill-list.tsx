@@ -6,7 +6,7 @@ import { Skill } from '../../lib/filterProject/data/filters';
 import supabase from '../../lib/supabase/client';
 
 const filterFetcher = async (field: string) => {
-  const { data } = await supabase.from<Skill>(field).select('*');
+  const { data } = await supabase.from<Skill>(field).select('name, project_requirements(projects(id))');
   return data;
 };
 
@@ -27,14 +27,28 @@ export default function SkillList() {
       <div className="mt-4">
         {
             !keyword
-              ? skills?.sort((a, b) => (a.name > b.name ? 1 : -1)).map((skill) => (
-                <SkillListItem key={skill.name} name={skill.name} projects={10} />
+              ? skills?.sort(
+                (a, b) => (a.project_requirements.length > b.project_requirements.length ? -1 : 1),
+              ).map((skill) => (
+                <SkillListItem
+                  key={skill.name}
+                  name={skill.name}
+                  projects={skill.project_requirements.length}
+                />
               ))
               : skills?.filter((item) => (
                 item.name.toLocaleLowerCase()
                   .includes(keyword.toLocaleLowerCase())))
-                .sort((a, b) => (a.name > b.name ? 1 : -1)).map((skill) => (
-                  <SkillListItem key={skill.name} name={skill.name} projects={10} />
+                .sort(
+                  (a, b) => (
+                    a.project_requirements.length > b.project_requirements.length ? -1 : 1
+                  ),
+                ).map((skill) => (
+                  <SkillListItem
+                    key={skill.name}
+                    name={skill.name}
+                    projects={skill.project_requirements.length}
+                  />
                 ))
         }
       </div>

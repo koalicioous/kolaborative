@@ -28,7 +28,7 @@ Events.getLayout = function getLayout(page: ReactElement) {
 };
 
 export async function getStaticProps() {
-  const { data: events } = await supabase.from('events').select('*');
+  const { data: events } = await supabase.from('events').select('name, projects(name');
   return {
     props: {
       fallback: {

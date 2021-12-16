@@ -6,12 +6,12 @@ import { Event } from '../../lib/filterProject/data/filters';
 import supabase from '../../lib/supabase/client';
 
 const filterFetcher = async (field: string) => {
-  const { data } = await supabase.from<Event>(field).select('*');
+  const { data } = await supabase.from<Event>(field).select('name, projects(name)');
   return data;
 };
 
 export default function EventList() {
-  const { data: majors } = useSWR('events', filterFetcher);
+  const { data: events } = useSWR('events', filterFetcher);
   const [keyword, setKeyword] = useState<string>('');
 
   return (
@@ -27,14 +27,26 @@ export default function EventList() {
       <div className="mt-4">
         {
             !keyword
-              ? majors?.sort((a, b) => (a.name > b.name ? 1 : -1)).map((major) => (
-                <EventListItem key={major.name} name={major.name} projects={10} />
+              ? events?.sort(
+                (a, b) => ((a.projects?.length || 0) > (b.projects?.length || 0) ? -1 : 1),
+              ).map((event) => (
+                <EventListItem
+                  key={event.name}
+                  name={event.name}
+                  projects={event.projects?.length}
+                />
               ))
-              : majors?.filter((item) => (
-                item.name.toLocaleLowerCase()
+              : events?.filter((event) => (
+                event.name.toLocaleLowerCase()
                   .includes(keyword.toLocaleLowerCase())))
-                .sort((a, b) => (a.name > b.name ? 1 : -1)).map((major) => (
-                  <EventListItem key={major.name} name={major.name} projects={10} />
+                .sort(
+                  (a, b) => ((a.projects?.length || 0) > (b.projects?.length || 0) ? -1 : 1),
+                ).map((event) => (
+                  <EventListItem
+                    key={event.name}
+                    name={event.name}
+                    projects={event.projects?.length}
+                  />
                 ))
         }
       </div>

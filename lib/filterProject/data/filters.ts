@@ -3,16 +3,23 @@ import supabase from "../../supabase/client";
 export type Major = {
     id: string,
     name: string,
+    projects?: {name: string}[]
 };
+
+export type ProjectRequirement = {
+  projects: { id:string }[]
+}
 
 export type Skill = {
     id: string,
     name: string,
+    project_requirements: ProjectRequirement[]
 };
 
 export type Event = {
     id: string,
     name: string,
+    projects?: { name: string }[]
 };
 
 export interface Filters {
